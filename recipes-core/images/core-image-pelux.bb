@@ -1,5 +1,5 @@
 #
-#   Copyright (C) 2015 Pelagicore AB
+#   Copyright (C) 2016 Pelagicore AB
 #
 DESCRIPTION = "Image for creating a Pelux image"
 
