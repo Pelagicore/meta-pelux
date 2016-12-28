@@ -3,7 +3,7 @@
 #
 DESCRIPTION = "Image for creating a Pelux image"
 
-inherit core-image-bistro
+require recipes-core/images/core-image-bistro.bb
 
 # Pelux components
 IMAGE_INSTALL += "softwarecontainer"
