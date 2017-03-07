@@ -1,0 +1,13 @@
+[Unit]
+Description=SoftwareContainer agent service
+Wants=dbus.socket
+After=dbus.socket
+
+[Service]
+Type=dbus
+BusName=com.pelagicore.SoftwareContainerAgent
+ExecStart=/usr/bin/softwarecontainer-agent
+Environment=XDG_RUNTIME_DIR=/tmp
+
+[Install]
+WantedBy=basic.target

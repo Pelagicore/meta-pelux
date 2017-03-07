@@ -1,0 +1,16 @@
+#
+# Copyright Pelagicore 2017
+#
+formatVersion: 1
+formatType: am-configuration
+---
+containers:
+  selection:
+    - com.pelagicore.radio: "softwarecontainer"
+    - "*": "process"
+
+  softwarecontainer:
+    dbus: system
+
+plugins:
+  container: [ "/usr/lib/libsoftwarecontainer-plugin.so" ]
