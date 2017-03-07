@@ -1,0 +1,47 @@
+{
+  "version": "1",
+  "capabilities": [
+    {
+      "name": "io.qt.ApplicationManager.Application",
+      "gateways": [
+        {
+          "id": "dbus",
+          "config": [
+            {
+             "dbus-gateway-config-system": [
+                {
+                  "direction": "*",
+                  "interface": "*",
+                  "object-path": "*",
+                  "method": "*"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wayland",
+          "config": [
+            {
+              "enabled": true
+            }
+          ]
+        },
+        {
+          "id": "devicenode",
+          "config": [
+            {
+              "name": "/dev/dri/renderD128"
+            },
+            {
+              "name": "/dev/tty0"
+            },
+            {
+              "name": "/dev/tty1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
