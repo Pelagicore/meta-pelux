@@ -8,4 +8,5 @@ require recipes-core/images/core-image-pelux.bb
 
 # Pelux components
 IMAGE_INSTALL += " neptune-ui        \
+                   dbus-session      \
                  "
