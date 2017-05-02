@@ -7,6 +7,7 @@ Requires=dbus-session@root.service
 ExecStart=/usr/bin/appman -r -c /opt/am/sc-config.yaml -c am-config.yaml --dbus session Main.qml -platform eglfs
 Restart=on-failure
 WorkingDirectory=/opt/neptune
+Environment=LC_ALL=en_US
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/root/dbus/user_bus_socket
 Environment=QT_IM_MODULE=qtvirtualkeyboard
 Environment=XDG_RUNTIME_DIR=/tmp
