@@ -12,4 +12,5 @@ IMAGE_INSTALL += "softwarecontainer"
 # GENIVI components
 IMAGE_INSTALL += " dlt-daemon         \
                    dlt-daemon-systemd \
+                   node-state-manager \
                  "
