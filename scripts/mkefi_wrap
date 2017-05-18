@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 <path_to_mkefidisk.sh> <input_hddimg> <root_device_on_target>"
+  exit 1
+fi
+
+MKEFISCRIPT=$1
+HDDIMG=$2
+TARGET_DEV=$3
+
+OUTPUT_IMG="output.img"
+
+# Ask for password early
+sudo ls > /dev/null
+if [ "$?" == "1" ]; then
+    exit 1
+fi
+
+# Create empty file (we could reuse this if it already exists)
+dd if=/dev/zero of=${OUTPUT_IMG} bs=4M count=1024
+
+# Setup loop device
+LOOPDEVICE=`sudo losetup --find --show ${OUTPUT_IMG}`
+
+sudo $MKEFISCRIPT $LOOPDEVICE $HDDIMG $TARGET_DEV
+
+sudo losetup -d $LOOPDEVICE
+
+echo "All done. The following command can be used to put the image on your device:"
+echo "dd if=${OUTPUT_IMG} of=<your-device> bs=4M status=progress"
