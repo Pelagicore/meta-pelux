@@ -19,7 +19,7 @@ This repository will follow the yocto release system. Whenever a new yocto relea
 
 License and Copyright
 ---------------------
-Copyright (C) 2016 Pelagicore AB
+Copyright (C) 2016-2017 Pelagicore AB
 
 All metadata is MIT licensed unless otherwise stated. Source code included in tree for individual recipes is under the LICENSE stated in the associated recipe (.bb file) unless otherwise stated.
 
