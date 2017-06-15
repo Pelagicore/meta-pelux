@@ -1,4 +1,4 @@
-From 7f2988cc0e50062277908b485c3a623d025e4cf9 Mon Sep 17 00:00:00 2001
+From 9d6c686b3350398c8029ce104f73b27495d734e3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Erik=20Bot=C3=B6?= <erik.boto@pelagicore.com>
 Date: Thu, 18 May 2017 15:12:56 +0200
 Subject: [PATCH] Fix automated runtime testing using SystemdbootTarget
@@ -10,7 +10,7 @@ Subject: [PATCH] Fix automated runtime testing using SystemdbootTarget
  3 files changed, 6 insertions(+), 9 deletions(-)
 
 diff --git a/meta/classes/testimage.bbclass b/meta/classes/testimage.bbclass
-index 6b6781d860..3994d18553 100644
+index 6b6781d..3994d18 100644
 --- a/meta/classes/testimage.bbclass
 +++ b/meta/classes/testimage.bbclass
 @@ -158,7 +158,7 @@ def testimage_main(d):
@@ -23,7 +23,7 @@ index 6b6781d860..3994d18553 100644
          result = tc.runTests()
          stoptime = time.time()
 diff --git a/meta/lib/oeqa/controllers/masterimage.py b/meta/lib/oeqa/controllers/masterimage.py
-index 9ce3bf803d..4981d3d425 100644
+index 9ce3bf8..c8e07d3 100644
 --- a/meta/lib/oeqa/controllers/masterimage.py
 +++ b/meta/lib/oeqa/controllers/masterimage.py
 @@ -108,7 +108,7 @@ class MasterImageHardwareTarget(oeqa.targetcontrol.BaseTarget, metaclass=ABCMeta
@@ -31,7 +31,7 @@ index 9ce3bf803d..4981d3d425 100644
              self.power_ctl("cycle")
          else:
 -            status, output = conn.run("reboot")
-+            status, output = conn.run("{ sleep 1; reboot; } > /dev/null &")
++            status, output = conn.run("sync; { sleep 1; reboot; } > /dev/null &")
              if status != 0:
                  bb.error("Failed rebooting target and no power control command defined. You need to manually reset the device.\n%s" % output)
  
@@ -45,7 +45,7 @@ index 9ce3bf803d..4981d3d425 100644
  
  class GummibootTarget(MasterImageHardwareTarget):
 diff --git a/meta/lib/oeqa/utils/sshcontrol.py b/meta/lib/oeqa/utils/sshcontrol.py
-index 05d6502550..d292893c08 100644
+index 05d6502..d292893 100644
 --- a/meta/lib/oeqa/utils/sshcontrol.py
 +++ b/meta/lib/oeqa/utils/sshcontrol.py
 @@ -150,12 +150,9 @@ class SSHControl(object):
@@ -65,5 +65,5 @@ index 05d6502550..d292893c08 100644
      def copy_from(self, remotepath, localpath):
          command = self.scp + ['%s@%s:%s' % (self.user, self.ip, remotepath), localpath]
 -- 
-2.11.0
+2.7.4
 
