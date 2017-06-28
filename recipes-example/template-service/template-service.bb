@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
 PR = "r0"
 PV = "1.0+git${SRCREV}"
 
-SRC_URI = "git://github.com/GordanM/template-service.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/Pelagicore/template-service.git;protocol=https;branch=master"
 
 SRCREV = "5bce3d20f996dac7e3882f48f5057abb7e1d05f5"
 
