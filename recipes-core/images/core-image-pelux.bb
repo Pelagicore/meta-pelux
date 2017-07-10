@@ -10,6 +10,9 @@ inherit core-image
 IMAGE_INSTALL += "softwarecontainer"
 IMAGE_INSTALL += "packagegroup-bistro-utils"
 
+# Pelux templates
+IMAGE_INSTALL += "template-service"
+
 # GENIVI components
 IMAGE_INSTALL += " dlt-daemon         \
                    dlt-daemon-systemd \
