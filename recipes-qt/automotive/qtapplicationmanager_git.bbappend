@@ -12,7 +12,7 @@ SRC_URI += " \
     file://sc-config.yaml \
     "
 
-do_install_append(){
+do_install_append_class-target() {
     install -d ${D}${libdir}
     install -m 755 ${B}/examples/softwarecontainer-plugin/libsoftwarecontainer-plugin.so ${D}/usr/lib/
     install ${WORKDIR}/sc-config.yaml ${D}/opt/am/
