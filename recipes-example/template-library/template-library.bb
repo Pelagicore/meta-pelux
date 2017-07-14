@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   SPDX-License-Identifier: MIT
 #
 
 SUMMARY = "A template C/C++ library"

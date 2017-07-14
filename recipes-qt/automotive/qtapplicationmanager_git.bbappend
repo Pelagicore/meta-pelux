@@ -1,6 +1,8 @@
 #
-# Copyright Pelagicore 2017
+#   Copyright (C) 2017 Pelagicore AB
+#   SPDX-License-Identifier: MIT
 #
+
 RDEPENDS_${PN} += "${PN}-softwarecontainer"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
