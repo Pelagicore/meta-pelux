@@ -1,6 +1,8 @@
 META-PELUX
 ==========
-Yocto layer providing "core-image-pelux".
+A Yocto/OpenEmbedded layer providing PELUX images. PELUX is a Linux based platform used for developing automotive infotainment projects.
+
+The layer provides the PELUX distro that is derived from poky. Furthermore, this layer provides `core-image-pelux` recipes, along with necessary additions to software components to enable a functional In-Vehicle Infotainment (IVI) base image. The software component additions and appendments found in this layer are specific for the PELUX image but can be used outside of this context. 
 
 Maintained at https://github.com/pelagicore/meta-pelux
 
