@@ -5,7 +5,7 @@
 
 DESCRIPTION = "Image for creating a Pelux image with Qt frontend"
 
-require recipes-core/images/core-image-pelux.bb
+inherit core-image-pelux
 
 # Pelux components
 IMAGE_INSTALL += " neptune-ui        \
