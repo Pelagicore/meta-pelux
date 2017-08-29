@@ -3,8 +3,6 @@
 #   SPDX-License-Identifier: MIT
 #
 
-DESCRIPTION = "Image for creating a Pelux image"
-
 inherit core-image
 
 # Pelux components
