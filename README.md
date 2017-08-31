@@ -12,7 +12,7 @@ Dependencies
 This layer depends on:
 * poky (http://git.yoctoproject.org/cgit/cgit.cgi/poky)
 * meta-openembedded (http://cgit.openembedded.org/meta-openembedded/)
-* meta-virtualization (http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization)
+* meta-virtualization (http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization), if the "process-containment" distro feature has been enabled
 * meta-bistro (https://github.com/Pelagicore/meta-bistro)
 
 Branching
