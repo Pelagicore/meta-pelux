@@ -12,6 +12,15 @@ IMAGE_INSTALL += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
 "
 
+# Pelux templates
+IMAGE_INSTALL += "template-service"
+
+# GENIVI components
+IMAGE_INSTALL += " dlt-daemon         \
+                   dlt-daemon-systemd \
+                   node-state-manager \
+                 "
+
 # Include bluetooth if the machine supports it (MACHINE_FEATURES), and it has
 # been selected in DISTRO_FEATURES.
 IMAGE_INSTALL += "\
