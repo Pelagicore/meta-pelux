@@ -7,7 +7,7 @@ The layer provides the PELUX distro that is derived from poky. Furthermore,
 this layer provides `core-image-pelux` recipes, along with necessary additions
 to software components to enable a functional In-Vehicle Infotainment (IVI)
 base image. The software component additions and appendments found in this
-layer are specific for the PELUX image but can be used outside of this context. 
+layer are specific for the PELUX image but can be used outside of this context.
 
 Maintained at https://github.com/pelagicore/meta-pelux
 
@@ -18,8 +18,14 @@ This layer depends on:
 * poky (http://git.yoctoproject.org/cgit/cgit.cgi/poky)
 * meta-openembedded (http://cgit.openembedded.org/meta-openembedded/)
 * meta-virtualization (http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization),
-if the "process-containment" distro feature has been enabled
+  if the "process-containment" distro feature has been enabled
 * meta-bistro (https://github.com/Pelagicore/meta-bistro)
+
+The relationship with `meta-bistro`, which is also developed at Pelagicore,
+is that `meta-bistro` contains general software recipes and configurations,
+aimed at the IVI domain, but no distribution and no images, whereas meta-pelux
+builds on top of meta-bistro by adding a distro and recipes to build complete
+system images.
 
 Branching
 ---------
