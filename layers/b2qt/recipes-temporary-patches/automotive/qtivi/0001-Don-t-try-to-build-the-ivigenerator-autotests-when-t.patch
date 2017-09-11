@@ -1,0 +1,33 @@
+From a210231cfad7a7bbdaccefaf19802c2a9165f522 Mon Sep 17 00:00:00 2001
+From: Dominik Holland <dominik.holland@pelagicore.com>
+Date: Thu, 7 Sep 2017 14:28:22 +0200
+Subject: [PATCH] Don't try to build the ivigenerator autotests when the
+ feature is disabled
+
+Change-Id: Icd34312d03c74ba66bb04fc9bf66ea0d19c15db9
+---
+ tests/auto/core/core.pro | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/tests/auto/core/core.pro b/tests/auto/core/core.pro
+index 87cdd762..1fcd7bd9 100644
+--- a/tests/auto/core/core.pro
++++ b/tests/auto/core/core.pro
+@@ -1,9 +1,12 @@
+ TEMPLATE = subdirs
+ 
+-SUBDIRS = ivigenerator \
+-          servicemanagertest \
++QT_FOR_CONFIG += ivicore
++
++SUBDIRS = servicemanagertest \
+           qivipropertyattribute \
+           qiviproperty \
+           qiviabstractfeature \
+           queryparser \
+           qivisearchandbrowsemodel \
++
++qtConfig(ivigenerator): SUBDIRS += ivigenerator
+-- 
+2.11.0
+
