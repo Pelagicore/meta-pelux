@@ -4,7 +4,10 @@
 #
 
 RDEPENDS_${PN} += "${PN}-softwarecontainer"
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+# Due to immediate expansion of variables using :=, ${PN} is not yet available
+# in this .inc-file
+FILESEXTRAPATHS_prepend := "${THISDIR}/qtapplicationmanager:"
 
 EXTRA_QMAKEVARS_PRE += "\
     -config enable-examples \
