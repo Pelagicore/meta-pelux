@@ -1,0 +1,14 @@
+CONF_VERSION = "1"
+DL_DIR = "${TOPDIR}/downloads"
+
+MACHINE = "raspberrypi3"
+SDKMACHINE = "x86_64"
+DISTRO = "pelux"
+
+BB_NUMBER_THREADS ?= "${@oe.utils.cpu_count()}"
+PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
+
+PACKAGE_CLASSES ?= "package_rpm"
+
+BB_DANGLINGAPPENDS_WARNONLY = "1"
+

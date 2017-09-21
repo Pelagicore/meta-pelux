@@ -1,0 +1,4 @@
+Available PELUX images:
+* core-image-pelux
+
+Build them by running: bitbake <image>
