@@ -13,9 +13,6 @@ IMAGE_INSTALL += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
 "
 
-# Pelux templates
-IMAGE_INSTALL += "template-service"
-
 # GENIVI components
 IMAGE_INSTALL += " dlt-daemon         \
                    dlt-daemon-systemd \
