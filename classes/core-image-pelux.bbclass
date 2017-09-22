@@ -9,8 +9,10 @@ inherit core-image
 IMAGE_INSTALL += "softwarecontainer"
 IMAGE_INSTALL += "packagegroup-bistro-utils"
 
-# Pelux templates
-IMAGE_INSTALL += "template-service"
+# Include softwarecontainer only if the process-containment feature has been enabled
+IMAGE_INSTALL += "\
+    ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
+"
 
 # GENIVI components
 IMAGE_INSTALL += " dlt-daemon         \
