@@ -6,3 +6,5 @@ EXTRA_OECONF_aarch64 += "--disable-introspection"
 # Wayland support is broken, so remove this until it is fixed upstream. Fixes:
 # | make[3]: *** No rule to make target 'viewporter-protocol.c', needed by 'all'.  Stop.
 PACKAGECONFIG_remove_aarch64 = "wayland"
+
+DEPENDS += " glib-2.0-native "
