@@ -1,5 +1,4 @@
 Available PELUX images:
-* core-image-pelux
-* core-image-pelux-qtauto
+* core-image-pelux-minimal
 
 Build them by running: bitbake <image>
