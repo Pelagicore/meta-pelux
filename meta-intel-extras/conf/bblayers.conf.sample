@@ -21,7 +21,6 @@ BBLAYERS ?= "                                         \
   ${BSPDIR}/sources/meta-virtualization               \
   ${BSPDIR}/sources/meta-bistro                       \
   ${BSPDIR}/sources/meta-template                     \
-  ${BSPDIR}/sources/meta-qt5                          \
   "
 
 
