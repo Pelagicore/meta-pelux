@@ -5,10 +5,7 @@
 
 inherit core-image
 
-# Pelux components
 IMAGE_INSTALL += "softwarecontainer"
-IMAGE_INSTALL += "packagegroup-bistro-utils"
-
 # Include softwarecontainer only if the process-containment feature has been enabled
 IMAGE_INSTALL += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
