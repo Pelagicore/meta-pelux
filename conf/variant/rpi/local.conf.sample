@@ -1,0 +1,4 @@
+
+require conf/variant/common/local.conf
+
+MACHINE = "raspberrypi3"
