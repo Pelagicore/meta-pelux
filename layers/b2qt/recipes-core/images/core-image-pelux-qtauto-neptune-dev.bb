@@ -7,4 +7,7 @@ DESCRIPTION = "Reference PELUX image with QtAuto frontend"
 
 require core-image-pelux-qtauto-neptune.bb
 
-IMAGE_INSTALL += " packagegroup-bistro-utils" 
+# Development stuff
+IMAGE_FEATURES += "tools-debug debug-tweaks"
+IMAGE_INSTALL += " packagegroup-bistro-utils"
+

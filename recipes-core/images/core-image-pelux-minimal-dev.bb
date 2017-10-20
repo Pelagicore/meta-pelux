@@ -5,5 +5,6 @@
 
 require core-image-pelux-minimal.bb
 
-# Pelux components
+# Development stuff
+IMAGE_FEATURES += "tools-debug debug-tweaks"
 IMAGE_INSTALL += " packagegroup-bistro-utils"
