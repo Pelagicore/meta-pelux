@@ -1,6 +1,6 @@
 # This is needed for bitbake to pick up the includes
 BSPDIR := "${TOPDIR}/.."
-BBPATH .= ":${BSPDIR}/sources/meta-pelux"
+BBPATH := "${TOPDIR}:${BSPDIR}/sources/meta-pelux"
 
 require conf/variant/common/bblayers.conf
 require conf/variant/common/bblayers-qtauto.conf
