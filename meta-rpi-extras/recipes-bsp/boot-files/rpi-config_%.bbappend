@@ -6,3 +6,9 @@
 #
 
 GPU_MEM="${@bb.utils.contains("BBFILE_COLLECTIONS", "b2qt", 512, 128, d)}"
+
+#
+# This option, together with the kernel serial command line parameter (in
+# commandline.txt) enables serial console from the kernel.
+#
+ENABLE_UART="1"
