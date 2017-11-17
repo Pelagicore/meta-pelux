@@ -5,9 +5,6 @@
 
 inherit core-image
 
-# Pelux components
-IMAGE_INSTALL += "packagegroup-bistro-utils"
-
 # Include softwarecontainer only if the process-containment feature has been enabled
 IMAGE_INSTALL += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
@@ -19,15 +16,13 @@ IMAGE_INSTALL += " dlt-daemon         \
                    node-state-manager \
                  "
 
-IMAGE_FEATURES += "ssh-server-openssh tools-debug package-management"
+IMAGE_FEATURES += "ssh-server-openssh package-management"
 
 # Include bluetooth if the machine supports it (MACHINE_FEATURES), and it has
 # been selected in DISTRO_FEATURES.
 IMAGE_INSTALL += "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
 "
-
-EXTRA_IMAGE_FEATURES_append = " debug-tweaks "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
 
@@ -37,5 +32,4 @@ toolchain_create_sdk_env_script_append() {
 }
 
 IMAGE_ROOTFS_SIZE ?= "1000000"
-
 IMAGE_FSTYPES ?= "ext3 sdcard"

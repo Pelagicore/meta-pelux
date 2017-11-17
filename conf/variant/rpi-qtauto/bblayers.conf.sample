@@ -1,0 +1,13 @@
+# This is needed for bitbake to pick up the includes
+BSPDIR := "${TOPDIR}/.."
+BBPATH := "${TOPDIR}:${BSPDIR}/sources/meta-pelux"
+
+require conf/variant/common/bblayers.conf
+require conf/variant/common/bblayers-qtauto.conf
+
+BBLAYERS += "\
+    ${BSPDIR}/sources/meta-pelux/meta-rpi-extras \
+    ${BSPDIR}/sources/meta-raspberrypi           \
+"
+
+
