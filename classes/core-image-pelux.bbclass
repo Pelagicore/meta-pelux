@@ -5,24 +5,24 @@
 
 inherit core-image
 
-IMAGE_INSTALL += "softwarecontainer"
+IMAGE_FEATURES += "ssh-server-openssh package-management"
+
 # Include softwarecontainer only if the process-containment feature has been enabled
 IMAGE_INSTALL += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
 "
 
-# GENIVI components
-IMAGE_INSTALL += " dlt-daemon         \
-                   dlt-daemon-systemd \
-                   node-state-manager \
-                 "
-
-IMAGE_FEATURES += "ssh-server-openssh package-management"
-
 # Include bluetooth if the machine supports it (MACHINE_FEATURES), and it has
 # been selected in DISTRO_FEATURES.
 IMAGE_INSTALL += "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
+"
+
+# GENIVI components
+IMAGE_INSTALL += "\
+    dlt-daemon         \
+    dlt-daemon-systemd \
+    node-state-manager \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
