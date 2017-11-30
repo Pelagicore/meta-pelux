@@ -5,7 +5,7 @@
 
 inherit core-image
 
-IMAGE_FEATURES += "ssh-server-openssh package-management"
+IMAGE_FEATURES += "ssh-server-openssh package-management debug-tweaks"
 
 # Include softwarecontainer only if the process-containment feature has been enabled
 IMAGE_INSTALL += "\
