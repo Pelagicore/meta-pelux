@@ -6,5 +6,5 @@
 require core-image-pelux-minimal.bb
 
 # Development stuff
-IMAGE_FEATURES += "tools-debug debug-tweaks"
+IMAGE_FEATURES += "tools-debug dbg-pkgs perf tools-testapps"
 IMAGE_INSTALL += " packagegroup-bistro-utils"
