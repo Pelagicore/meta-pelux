@@ -6,7 +6,7 @@ Requires=dbus-session@root.service
 [Service]
 ExecStart=/usr/bin/appman -r -c am-config.yaml --dbus session -platform eglfs $EXTRA_ARGUMENTS
 Restart=on-failure
-WorkingDirectory=/opt/neptune
+WorkingDirectory=/usr/neptune-ui
 Environment=HOME=/home/%u/
 Environment=LC_ALL=en_US
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/root/dbus/user_bus_socket
