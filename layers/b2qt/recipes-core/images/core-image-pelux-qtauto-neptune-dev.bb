@@ -9,5 +9,4 @@ require core-image-pelux-qtauto-neptune.bb
 
 # Development stuff
 IMAGE_FEATURES += "tools-debug tools-testapps"
-IMAGE_INSTALL += " packagegroup-bistro-utils"
-
+IMAGE_INSTALL += " packagegroup-bistro-debug-utils"
