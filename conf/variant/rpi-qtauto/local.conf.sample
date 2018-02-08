@@ -2,3 +2,5 @@
 require conf/variant/common/local.conf
 
 MACHINE = "raspberrypi3"
+
+RPI_USE_U_BOOT = "1"
