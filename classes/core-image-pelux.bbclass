@@ -39,3 +39,4 @@ toolchain_create_sdk_env_script_append() {
 
 IMAGE_ROOTFS_SIZE ?= "1000000"
 IMAGE_FSTYPES ?= "ext3 sdcard"
+IMAGE_FSTYPES += "ext3.gz"
