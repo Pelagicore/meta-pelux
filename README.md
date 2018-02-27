@@ -20,6 +20,7 @@ This layer depends on:
 * meta-virtualization (http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization),
   if the "process-containment" distro feature has been enabled
 * meta-bistro (https://github.com/Pelagicore/meta-bistro)
+* meta-swupdate (https://github.com/sbabic/meta-swupdate)
 
 The relationship with `meta-bistro`, which is also developed at Pelagicore,
 is that `meta-bistro` contains general software recipes and configurations,
