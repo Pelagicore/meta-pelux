@@ -1,0 +1,159 @@
+#!/bin/bash
+
+# Copyright (C) 2018 Luxoft
+#
+# This is a handy script used to launch QEMU easily.
+# It wraps up the kvm command and provides simple options to lanuch dev and prod images
+# without loosing the flexibility to adjust parameters like memory, cpu, etc.
+#
+# To see the usage, run:
+# ./qemu_launcher.sh -h
+#
+# e.g.
+# To start dev image with static IP (asumming the current folder is the build)
+# ./qemu_launcher.sh -d -s
+#
+#
+
+command -v kvm > /dev/null
+if [ $? != 0 ]
+then
+    echo "Warning:"
+    echo "kvm is not installed yet, please install it with command below and rerun the script"
+    echo "sudo apt-get install qemu-kvm libvirt-clients libvirt-daemon-system "
+    exit 1
+fi
+
+set -e
+
+# Print usage information of the script
+usage() {
+    echo "usage: $0 [options]"
+    echo -e "[options] is any of the following:"
+    echo -e "  -f | --folder           \tSpecify a source folder of the QEMU image"
+    echo -e "                          \tDefaults to tmp/deploy/images/qemux86-64"
+    echo -e "  -i | --hda              \tSpecify rootfs file. Defaults to core-image-pelux-minimal-qemux86-64.ext4"
+    echo -e "  -p | --ssh_port         \tSSH port to connet to QEMU. Defaults to 1234"
+    echo -e "  -n | --smp              \tNumber of cpu cores. Defaults to 4"
+    echo -e "  -k | --kernel_path      \tBy default, kernel_path is the same as folder, but can be overwritten by using this option"
+    echo -e "  -c | --cmdline          \tSpecify kernel command line. This would allow power users to change vga or root, etc."
+    echo -e "                          \tDefaults to \"vga=0 uvesafb.mode_option=1280×720-32 root=/dev/hda console=ttyS0 rw oprofile.timer=1\""
+    echo -e "  -m | --mem              \tMaximum amount of guest memory (Size is in megabytes)"
+    echo -e "                          \tDefaults to 512"
+    echo -e "  -t | --gdb_port         \tThe port is forwarded so that gdbserver can listen on it"
+    echo -e "                          \tThen gdb can be run from develop machine to connect to the port for remote debugging"
+    echo -e "                          \tDefaults to 3333"
+    echo -e "  -d | --dev              \tRun QEMU development image instead of normal image"
+    echo -e "                          \tDefaults to core-image-pelux-minimal-dev-qemux86-64.ext4"
+    echo -e "  -s | --static           \tRun QEMU development image with static IP (192.168.7.2)"
+    echo -e "  -l | --list             \tList all available images from the default folder or folder user specified"
+    echo -e "  -h | --help             \tDisplay this help"
+    exit 0
+}
+
+list_images() {
+    echo "Available images:"
+    ls $folder/*.ext4 | xargs -n 1 basename
+    exit 0
+}
+
+setup_folder() {
+    folder=$1
+    if [ -z ${kernel_path+x} ]
+    then
+        kernel_path=$folder
+    fi
+}
+
+setup_dev() {
+    DEV=true
+    if [ $hda == "core-image-pelux-minimal-qemux86-64.ext4"  ]
+    then
+        hda="core-image-pelux-minimal-dev-qemux86-64.ext4"
+    fi
+}
+
+start_qemu(){
+    sudo kvm -kernel $kernel_path/bzImage \
+        $1 \
+        -net $NET\
+        -cpu Broadwell \
+        -smp $smp \
+        -hda $folder/$hda \
+        -vga qxl \
+        -no-reboot \
+        -soundhw ac97 \
+        -m $mem \
+        -append "$cmdline" -serial stdio
+}
+
+
+# Set default values
+folder="tmp/deploy/images/qemux86-64"
+hda="core-image-pelux-minimal-qemux86-64.ext4"
+ssh_port=1234
+smp=4
+mem=512
+gdb_port=3333
+cmdline="vga=0 uvesafb.mode_option=1280×720-32 root=/dev/hda console=ttyS0 rw oprofile.timer=1"
+DEV=false
+STATIC_IP=false
+
+
+# Read the options, options with : afterward require an argument
+OPTS=`getopt --options f:i:p:n:m:k:c:t:dslh --longoptions folder:,hda:,ssh_port:,smp:,mem:,kernel_path:,cmdline:,gdb_port:,dev,static,list,help -n 'qemu_launcher.sh' -- "$@"`
+
+# Check if getopt is able to read all options
+if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
+
+# Set the options
+eval set -- "$OPTS"
+
+# Parse the options
+while true; do
+    case "$1" in
+        -f | --folder      )  setup_folder $2
+            shift 2 ;;
+        -i | --hda         )  hda=$2
+            shift 2 ;;
+        -p | --ssh_port    )  ssh_port=$2
+            shift 2 ;;
+        -n | --smp         )  smp=$2
+            shift 2 ;;
+        -m | --mem         )  mem=$2
+            shift 2 ;;
+        -t | --gdb_port    )  gdb_port=$2
+            shift 2 ;;
+        -k | --kernel_path )  kernel_path=$2
+            shift 2 ;;
+        -c | --cmdline     )  cmdline=$2
+            shift 2 ;;
+        -d | --dev         )  setup_dev
+            shift ;;
+        -s | --static      )  STATIC_IP=true
+            shift ;;
+        -l | --list        )  list_images
+            shift ;;
+        -h | --help        )  usage
+            shift ;;
+        --                 )  shift; break ;;
+        *                  )  echo "Invalid option !"
+            exit 1 ;;
+    esac
+done
+
+NET=user,hostfwd=tcp::$ssh_port-:22
+
+if [[ $DEV == false ]]
+then
+    start_qemu
+else
+    NET=$NET,hostfwd=tcp::$gdb_port-:$gdb_port
+    if [[ $STATIC_IP == false ]]
+    then
+        start_qemu "-net nic"
+    else
+        cmdline="$cmdline ip=192.168.7.2::192.168.7.1:255.255.255.0"
+        start_qemu "-device virtio-net-pci,netdev=net0,mac=52:54:00:12:34:02 -netdev tap,id=net0,ifname=tap0,script=no,downscript=no"
+    fi
+fi
