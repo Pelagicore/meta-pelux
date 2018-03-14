@@ -7,11 +7,11 @@
 # without loosing the flexibility to adjust parameters like memory, cpu, etc.
 #
 # To see the usage, run:
-# ./qemu_launcher.sh -h
+# ./qemu_launcher -h
 #
 # e.g.
 # To start dev image with static IP (asumming the current folder is the build)
-# ./qemu_launcher.sh -d -s
+# ./qemu_launcher -d -s
 #
 #
 
@@ -101,7 +101,7 @@ STATIC_IP=false
 
 
 # Read the options, options with : afterward require an argument
-OPTS=`getopt --options f:i:p:n:m:k:c:t:dslh --longoptions folder:,hda:,ssh_port:,smp:,mem:,kernel_path:,cmdline:,gdb_port:,dev,static,list,help -n 'qemu_launcher.sh' -- "$@"`
+OPTS=`getopt --options f:i:p:n:m:k:c:t:dslh --longoptions folder:,hda:,ssh_port:,smp:,mem:,kernel_path:,cmdline:,gdb_port:,dev,static,list,help -n 'qemu_launcher' -- "$@"`
 
 # Check if getopt is able to read all options
 if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
