@@ -1,0 +1,137 @@
+#!/bin/bash
+
+# Copyright (C) 2018 Luxoft
+
+# This is a help script for running gdb+gdbserver for remote debugging
+
+# To see the usage, run:
+# ./gdb_helper -h
+
+# To start gdbserver on target
+# ./gdb_helper -s
+
+# To transfer executable file from development machine to DEST on target and start gdb for remote debugging
+# ./gdb_helper -f exe_file -d DEST
+
+# To start gdbserver and attach to a running process with PID
+# ./gdb_helper -P PID
+
+# Then start gdb on dev machine for remote debugging
+# ./gdb_helper -g
+
+
+
+gdb_check() {
+    (env | grep GDB) > /dev/null
+    if [ "$?" != 0 ]
+    then
+        >&2 echo "No target GDB found, please source the target environment first from the SDK"
+        exit 1
+    fi
+}
+
+# Set default values
+target_ip=127.0.0.1
+ssh_port=1234
+gdb_port=3333
+dest=/tmp
+
+
+# Print usage information of the script
+usage() {
+    echo "usage: $0 [options]"
+    echo -e "[options] is any of the following:"
+    echo -e "  -f | --file            \tTransfer the executable file to the target and start gdb"
+    echo -e "  -d | --dest            \tThe destination folder on target where the file will be transferred"
+    echo -e "  -P | --PID             \tThe PID on target to be attached"
+    echo -e "  -i | --target_ip       \tThe target IP address. Defaults to 127.0.0.1"
+    echo -e "  -p | --ssh_port        \tSSH port to connect to the target. Defaults to 1234"
+    echo -e "  -t | --gdb_port        \tThe port for remote debugging. Defaults to 3333"
+    echo -e "  -s | --server          \tStart gdbserver on target"
+    echo -e "  -g | --gdb             \tStart gdb on development machine"
+    echo -e "  -h | --help            \tDisplay this help"
+    exit 0
+}
+
+start_gdb(){
+    gdb_check
+    symbols_path=$(env | grep KCFLAGS | awk -F'=' '{print $3}')
+    rm -rf cmds
+    if [ -n "$exe_file" ]
+    then
+        filename=$(basename $exe_file)
+        echo >> "cmds" "set sysroot $symbols_path"
+        echo >> "cmds" "target extended-remote $target_ip:$gdb_port"
+        echo >> "cmds" "file $exe_file"
+        echo >> "cmds" "remote put $exe_file $dest/$filename"
+        echo >> "cmds" "set remote exec-file $dest/$filename"
+    else
+        echo >> "cmds" "target extended-remote $target_ip:$gdb_port"
+    fi
+    $GDB -x cmds $exe_file
+    exit 0
+}
+
+start_gdbserver() {
+    gdb_check
+    ssh root@$target_ip -p $ssh_port gdbserver --multi $target_ip:$gdb_port
+    exit 0
+}
+
+start_gdbserver_attach() {
+    gdb_check
+    ssh root@$target_ip -p $ssh_port gdbserver $target_ip:$gdb_port --attach $PID
+    exit 0
+}
+
+
+# Read the options, options with : afterward require an argument
+OPTS=`getopt --options f:d:P:i:p:t:sgh --longoptions file:,dest:,PID:,target_ip:,ssh_port:,gdb_port:,server,gdb,help -n 'gdb_helper' -- "$@"`
+
+# Check if getopt is able to read all options
+if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
+
+# Set the options
+eval set -- "$OPTS"
+
+# Parse the options
+while true; do
+    case "$1" in
+        -f | --file            ) exe_file=$2
+            shift 2 ;;
+        -d | --dest            ) dest=$2
+            shift 2 ;;
+        -P | --PID             ) PID=$2
+            shift 2 ;;
+        -i | --target_ip       ) target_ip=$2
+            shift 2 ;;
+        -p | --ssh_port        ) ssh_port=$2
+            shift 2 ;;
+        -t | --gdb_port        ) gdb_port=$2
+            shift 2 ;;
+        -s | --server          ) start_gdbserver
+            shift ;;
+        -g | --gdb             ) start_gdb
+            shift ;;
+        -h | --help            ) usage
+            shift ;;
+        --                     ) shift; break ;;
+        *                      ) echo "Invalid option !"
+            exit 1 ;;
+    esac
+done
+
+gdb_check
+
+if [ -n "$exe_file" ]
+then
+    start_gdb
+fi
+
+if [ -n "$PID" ]
+then
+    start_gdbserver_attach
+fi
+
+echo "Please provide an executable file or PID to debug"
+usage
