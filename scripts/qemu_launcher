@@ -45,7 +45,11 @@ usage() {
     echo -e "                          \tDefaults to 3333"
     echo -e "  -d | --dev              \tRun QEMU development image instead of normal image"
     echo -e "                          \tDefaults to core-image-pelux-minimal-dev-qemux86-64.ext4"
-    echo -e "  -s | --static           \tRun QEMU development image with static IP (192.168.7.2)"
+    echo -e "  -s | --static           \tThe switch to toggle running QEMU dev image with static IP (Defaults to false)"
+    echo -e "  -I | --target_ip        \tSpecify the target static IP, must be 192.168.7.x (Defaults to 192.168.7.2)"
+    echo -e "                          \tPlease aware that to change the default static IP, it is also needed to update the"
+    echo -e "                          \tSTATIC_IP_ADDRESS in local.conf in meta layer and rebuild the image"
+    echo -e "  -g | --server_ip        \tSpecify the gateway server IP, must be 192.168.7.x (Defaults to 192.168.7.1)"
     echo -e "  -l | --list             \tList all available images from the default folder or folder user specified"
     echo -e "  -h | --help             \tDisplay this help"
     exit 0
@@ -98,10 +102,12 @@ gdb_port=3333
 cmdline="vga=0 uvesafb.mode_option=1280×720-32 root=/dev/hda console=ttyS0 rw oprofile.timer=1"
 DEV=false
 STATIC_IP=false
+target_ip="192.168.7.2"
+server_ip="192.168.7.1"
 
 
 # Read the options, options with : afterward require an argument
-OPTS=`getopt --options f:i:p:n:m:k:c:t:dslh --longoptions folder:,hda:,ssh_port:,smp:,mem:,kernel_path:,cmdline:,gdb_port:,dev,static,list,help -n 'qemu_launcher' -- "$@"`
+OPTS=`getopt --options f:i:p:n:m:k:c:t:I:g:dslh --longoptions folder:,hda:,ssh_port:,smp:,mem:,kernel_path:,cmdline:,gdb_port:,target_ip:,server_ip:,dev,static,list,help -n 'qemu_launcher' -- "$@"`
 
 # Check if getopt is able to read all options
 if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
@@ -128,6 +134,10 @@ while true; do
             shift 2 ;;
         -c | --cmdline     )  cmdline=$2
             shift 2 ;;
+        -I | --target_ip   )  target_ip=$2
+            shift 2 ;;
+        -g | --server_ip   )  server_ip=$2
+            shift 2 ;;
         -d | --dev         )  setup_dev
             shift ;;
         -s | --static      )  STATIC_IP=true
@@ -153,7 +163,7 @@ else
     then
         start_qemu "-net nic"
     else
-        cmdline="$cmdline ip=192.168.7.2::192.168.7.1:255.255.255.0"
-        start_qemu "-device virtio-net-pci,netdev=net0,mac=52:54:00:12:34:02 -netdev tap,id=net0,ifname=tap0,script=no,downscript=no"
+        cmdline="$cmdline ip=$target_ip::$server_ip:255.255.255.0"
+        start_qemu "-device virtio-net-pci,netdev=net0 -netdev tap,id=net0,ifname=tap0,script=no,downscript=no"
     fi
 fi
