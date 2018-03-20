@@ -26,7 +26,7 @@ IMAGE_INSTALL += "\
 "
 
 # OTA mechanism
-IMAGE_INSTALL += "\
+IMAGE_INSTALL_append_rpi += "\
     swupdate \
 "
 
