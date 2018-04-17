@@ -21,4 +21,4 @@ IMAGE_INSTALL += " \
 "
 
 TOOLCHAIN_HOST_TASK += " nativesdk-packagegroup-b2qt-automotive-qt5-toolchain-host "
-TOOLCHAIN_TARGET_TASK += " packagegroup-b2qt-automotive-qt5-toolchain-target "
+TOOLCHAIN_TARGET_TASK += " packagegroup-b2qt-automotive-qt5-toolchain-target qtapplicationmanager-staticdev"
