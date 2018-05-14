@@ -30,6 +30,10 @@ IMAGE_INSTALL_append_rpi += "\
     swupdate \
 "
 
+IMAGE_INSTALL_append_arp += "\
+    framegrabber \
+"
+
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
 
 # Add "/usr/lib/cmake" to the PATH variable so that CMake can find the *Config.cmake" when FIND_PACKAGE() is called from a CMake makefile
