@@ -25,6 +25,8 @@ parallel (
     'intel':        { buildPelux("intel",        "core-image-pelux-minimal") },
     'intel-qtauto': { buildPelux("intel-qtauto", "core-image-pelux-qtauto-neptune") },
     'rpi':          { buildPelux("rpi",          "core-image-pelux-minimal") },
-    'rpi-qtauto':   { buildPelux("rpi-qtauto",   "core-image-pelux-qtauto-neptune") }
+    'rpi-qtauto':   { buildPelux("rpi-qtauto",   "core-image-pelux-qtauto-neptune") },
+    'arp':          { buildPelux("arp",          "core-image-pelux-minimal") },
+    'arp-qtauto':   { buildPelux("arp-qtauto",   "core-image-pelux-qtauto-neptune") }
 )
 
