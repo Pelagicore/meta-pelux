@@ -1,4 +1,4 @@
 
 require conf/variant/common/local.conf
 
-MACHINE = "intel-corei7-64"
+MACHINE = "arp"
