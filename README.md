@@ -12,15 +12,17 @@ layer are specific for the PELUX image but can be used outside of this context.
 Maintained at https://github.com/pelagicore/meta-pelux
 
 Dependencies
-------------
 
 This layer depends on:
-* poky (http://git.yoctoproject.org/cgit/cgit.cgi/poky)
-* meta-openembedded (http://cgit.openembedded.org/meta-openembedded/)
-* meta-virtualization (http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization),
-  if the "process-containment" distro feature has been enabled
-* meta-bistro (https://github.com/Pelagicore/meta-bistro)
-* meta-swupdate (https://github.com/sbabic/meta-swupdate)
+
+------------
+| meta layer          | git repo                                                      |
+| ------------------- | ------------------------------------------------------------- |
+| poky                | http://git.yoctoproject.org/cgit/cgit.cgi/poky                |
+| meta-openembedded   | http://cgit.openembedded.org/meta-openembedded                |
+| meta-virtualization | http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization |
+| meta-bistro         | https://github.com/Pelagicore/meta-bistro                     |
+| meta-swupdate       | https://github.com/sbabic/meta-swupdate                       |
 
 The relationship with `meta-bistro`, which is also developed at Pelagicore,
 is that `meta-bistro` contains general software recipes and configurations,
