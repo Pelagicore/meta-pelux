@@ -31,7 +31,7 @@ IMAGE_INSTALL_append_rpi += "\
 "
 
 IMAGE_INSTALL_append_arp += "\
-    framegrabber \
+    arp-driver \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
