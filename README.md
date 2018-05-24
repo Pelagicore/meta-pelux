@@ -1,4 +1,4 @@
-META-PELUX
+meta-pelux
 ==========
 A Yocto/OpenEmbedded layer providing PELUX images. PELUX is a Linux based
 platform used for developing automotive infotainment projects.
