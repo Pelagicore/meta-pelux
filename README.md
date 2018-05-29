@@ -12,10 +12,10 @@ layer are specific for the PELUX image but can be used outside of this context.
 Maintained at https://github.com/pelagicore/meta-pelux
 
 Dependencies
+------------
 
 This layer depends on:
 
-------------
 | meta layer          | git repo                                                      |
 | ------------------- | ------------------------------------------------------------- |
 | poky                | http://git.yoctoproject.org/cgit/cgit.cgi/poky                |
