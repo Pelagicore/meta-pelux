@@ -19,7 +19,7 @@ IMAGE_DEPENDS = "${PELUXIMG}"
 SWUPDATE_IMAGES = "${PELUXIMG}"
 inherit swupdate
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/pelux-image-update/raspberrypi3:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/pelux-image-update/:"
 SRC_URI = " file://sw-description "
 SRC_URI_append_raspberrypi3 = " file://emmcsetup.lua "
 
