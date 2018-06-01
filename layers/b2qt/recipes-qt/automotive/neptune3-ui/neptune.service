@@ -4,9 +4,9 @@ After=dbus-session@root.service
 Requires=dbus-session@root.service
 
 [Service]
-ExecStart=/usr/bin/appman -r -c am-config.yaml --dbus session -platform eglfs $EXTRA_ARGUMENTS
+ExecStart=/opt/neptune3/neptune3-ui -r --dbus session -c am-config.yaml -platform eglfs $EXTRA_ARGUMENTS
 Restart=on-failure
-WorkingDirectory=/usr/neptune-ui
+WorkingDirectory=/opt/neptune3
 Environment=HOME=/home/%u/
 Environment=LC_ALL=en_US
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/root/dbus/user_bus_socket

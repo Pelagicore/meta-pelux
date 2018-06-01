@@ -7,7 +7,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 RDEPENDS_${PN}_append = "\
       dbus-session       \
-      qtquickcontrols2   \
       "
 
 HAS_CONTAINMENT = "${@bb.utils.contains('DISTRO_FEATURES', 'process-containment', '-c /opt/am/sc-config.yaml', '', d)}"
@@ -30,3 +29,8 @@ do_install_prepend_rpi() {
         sed -i -e "/^\[Install\]$/i $ENV_LINE" ${WORKDIR}/neptune.service
     fi
 }
+
+RDEPENDS_${PN} += " qtquickcontrols-qmlplugins "
+
+FILES_${PN}-tests += "/usr/share/qt5/tests/neptune-qmltestsrunner/neptune-qmltestsrunner"
+PACKAGES =+ "${PN}-tests"
