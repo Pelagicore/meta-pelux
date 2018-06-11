@@ -5,7 +5,7 @@
 
 inherit core-image
 
-IMAGE_FEATURES += "package-management debug-tweaks"
+IMAGE_FEATURES += "ssh-server-openssh package-management debug-tweaks"
 
 # Include softwarecontainer only if the process-containment feature has been enabled
 IMAGE_INSTALL += "\
@@ -25,12 +25,13 @@ IMAGE_INSTALL += "\
     node-state-manager \
 "
 
-# OTA mechanism
-IMAGE_INSTALL_append_rpi += "\
+
+IMAGE_INSTALL += " \
     swupdate \
+    grub-efi \
 "
 
-IMAGE_INSTALL_append_arp += "\
+IMAGE_INSTALL_arp += "\
     framegrabber \
 "
 

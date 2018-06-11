@@ -1,0 +1,9 @@
+[Unit]
+Description=Grub Environment Copy
+
+[Service]
+ExecStart=/usr/bin/grubenv-copy.sh
+
+[Install]
+WantedBy=multi-user.target
+
