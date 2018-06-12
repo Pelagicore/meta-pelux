@@ -1,0 +1,39 @@
+software = {
+    version = "1.0";
+    hardware-compatibility: [ "1.0" ];
+
+    stable : {
+        main : {
+            images: ({
+                filename = "core-image-pelux-minimal-intel-corei7-64.ext3.gz";
+                compressed = true;
+                type = "raw";
+                device = "/dev/sda2";
+            });
+            scripts: ({
+                filename = "emmcsetup.lua";
+                type = "lua";
+            });
+            bootenv: ({
+                name = "default";
+                value = "0";
+            });
+        };
+        alt : {
+            images: ({
+                filename = "core-image-pelux-minimal-intel-corei7-64.ext3.gz";
+                compressed = true;
+                type = "raw";
+                device = "/dev/sda3";
+            });
+            scripts: ({
+                filename = "emmcsetup.lua";
+                type = "lua";
+            });
+            bootenv: ({
+                name = "default";
+                value = "1";
+            });
+        };
+    };
+}
