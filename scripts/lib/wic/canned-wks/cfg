@@ -1,0 +1,16 @@
+serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+
+timeout=5
+
+load_env
+set default=${default}
+save_env default
+
+# Boot entries
+menuentry 'bootA'{
+    linux /bzImage root=/dev/sda2 rootwait rootfstype=ext4 console=ttyS0,115200 console=tty0
+}
+
+menuentry 'bootB'{
+    linux /bzImage root=/dev/sda3 rootwait rootfstype=ext4 console=ttyS0,115200 console=tty0
+}
