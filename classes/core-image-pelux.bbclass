@@ -30,6 +30,10 @@ IMAGE_INSTALL_append_rpi += "\
     swupdate \
 "
 
+IMAGE_INSTALL_append_intel-corei7-64 = "\
+    swupdate \
+"
+
 IMAGE_INSTALL_append_arp += "\
     arp-driver \
 "
