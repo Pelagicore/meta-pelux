@@ -1,0 +1,8 @@
+[Unit]
+Description=Service that copies grubenv to /boot/ after swupdate
+
+[Service]
+ExecStart=/usr/bin/grubenv-copy.sh
+
+[Install]
+WantedBy=multi-user.target
