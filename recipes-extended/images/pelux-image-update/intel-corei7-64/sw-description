@@ -5,7 +5,7 @@ software = {
     stable : {
         main : {
             images: ({
-                filename = "core-image-pelux-minimal-intel-corei7-64.ext3.gz";
+                filename = "%%PELUX_IMAGE_NAME_PLACEHOLDER%%";
                 compressed = true;
                 type = "raw";
                 device = "/dev/sda2";
@@ -21,7 +21,7 @@ software = {
         };
         alt : {
             images: ({
-                filename = "core-image-pelux-minimal-intel-corei7-64.ext3.gz";
+                filename = "%%PELUX_IMAGE_NAME_PLACEHOLDER%%";
                 compressed = true;
                 type = "raw";
                 device = "/dev/sda3";
