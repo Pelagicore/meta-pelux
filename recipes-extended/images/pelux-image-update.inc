@@ -20,6 +20,14 @@ SWUPDATE_IMAGES = "${PELUXIMG}"
 inherit swupdate
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/pelux-image-update/:"
+
+# sw-description is a "hard requirement" (swupdate won't work without it,
+# no matter what the target is), so we add it to SRC_URI irrespective of
+# the target. Whereas emmcsetup.lua could be kept out of the update
+# artifacts for certain targets (for instance, if the disk is already
+# partitioned or if we don't use an A+B partitioning scheme), so we append
+# it specific to the target.
+
 SRC_URI = " file://sw-description "
 SRC_URI_append_raspberrypi3 = " file://emmcsetup.lua "
 SRC_URI_append_intel-corei7-64 = " file://emmcsetup.lua "
