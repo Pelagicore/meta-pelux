@@ -6,6 +6,4 @@ EFI_PROVIDER = "grub-efi"
 
 WKS_FILE = "mkefidisk-multiboot.wks"
 
-IMAGE_INSTALL_append = "\
-    grub-efi \
-"
+IMAGE_INSTALL_append = " grub-efi"
