@@ -4,6 +4,4 @@ MACHINE = "intel-corei7-64"
 
 EFI_PROVIDER = "grub-efi"
 
-IMAGE_INSTALL_append = "\
-    grub-efi \
-"
+IMAGE_INSTALL_append = " grub-efi"
