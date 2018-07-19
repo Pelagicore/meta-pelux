@@ -9,12 +9,12 @@ SRC_URI += "\
 "
 
 do_install_append() {
+    install -d ${D}${bindir}
     install -d ${D}${datadir}
-    install -m 0755 ${WORKDIR}/grubenv ${D}${datadir}
-
-    install -m 0755 ${WORKDIR}/grubenv-copy.sh ${D}${bindir}
-
     install -d ${D}${systemd_system_unitdir}
+
+    install -m 0755 ${WORKDIR}/grubenv ${D}${datadir}
+    install -m 0755 ${WORKDIR}/grubenv-copy.sh ${D}${bindir}
     install -m 0755 ${WORKDIR}/grubenv-copy.service ${D}${systemd_system_unitdir}
 }
 
