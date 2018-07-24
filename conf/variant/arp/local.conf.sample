@@ -1,4 +1,9 @@
-
 require conf/variant/common/local.conf
 
 MACHINE = "arp"
+
+EFI_PROVIDER = "grub-efi"
+
+WKS_FILE = "mkefidisk-multiboot.wks"
+
+IMAGE_INSTALL_append = " grub-efi"
