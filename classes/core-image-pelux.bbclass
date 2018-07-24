@@ -8,25 +8,25 @@ inherit core-image
 IMAGE_FEATURES += "package-management debug-tweaks"
 
 # Include softwarecontainer only if the process-containment feature has been enabled
-IMAGE_INSTALL += "\
+IMAGE_INSTALL_append = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
 "
 
 # Include bluetooth if the machine supports it (MACHINE_FEATURES), and it has
 # been selected in DISTRO_FEATURES.
-IMAGE_INSTALL += "\
+IMAGE_INSTALL_append = "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
 "
 
 # GENIVI components
-IMAGE_INSTALL += "\
+IMAGE_INSTALL_append = "\
     dlt-daemon         \
     dlt-daemon-systemd \
     node-state-manager \
 "
 
 # OTA mechanism
-IMAGE_INSTALL_append_rpi += "\
+IMAGE_INSTALL_append_rpi = "\
     swupdate \
 "
 
@@ -34,7 +34,7 @@ IMAGE_INSTALL_append_intel-corei7-64 = "\
     swupdate \
 "
 
-IMAGE_INSTALL_append_arp += "\
+IMAGE_INSTALL_append_arp = "\
     arp-driver \
     swupdate \
 "
