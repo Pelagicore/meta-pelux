@@ -36,6 +36,7 @@ IMAGE_INSTALL_append_intel-corei7-64 = "\
 
 IMAGE_INSTALL_append_arp += "\
     arp-driver \
+    swupdate \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
