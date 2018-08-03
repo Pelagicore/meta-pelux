@@ -1,0 +1,1 @@
+EXTRA_OECMAKE += " -DCMAKE_TOOLCHAIN_FILE=${STAGING_DIR_TARGET}/usr/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake"
