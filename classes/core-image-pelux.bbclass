@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   Copyright (C) 2018 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -23,6 +24,12 @@ IMAGE_INSTALL_append = "\
     dlt-daemon         \
     dlt-daemon-systemd \
     node-state-manager \
+"
+
+# CAN utilities
+IMAGE_INSTALL_append = "\
+    libsocketcan \
+    can-utils \
 "
 
 # OTA mechanism
