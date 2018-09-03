@@ -21,9 +21,14 @@ void buildPelux(String variant, String imageName) {
     }
 }
 
-parallel (
-    'intel':        { buildPelux("intel",        "core-image-pelux-minimal") },
-    'intel-qtauto': { buildPelux("intel-qtauto", "core-image-pelux-qtauto-neptune") },
-    'rpi':          { buildPelux("rpi",          "core-image-pelux-minimal") },
-    'rpi-qtauto':   { buildPelux("rpi-qtauto",   "core-image-pelux-qtauto-neptune") }
-)
+def variantMap = [:]
+def variantList = env.VARIANT_LIST.split()
+
+variantList.each {
+    def list = it.split(":")
+    variantMap["${list[0]}"] = {
+        buildPelux(list[0], list[1])
+    }
+}
+
+parallel (variantMap)
