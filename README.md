@@ -13,7 +13,6 @@ Maintained at https://github.com/pelagicore/meta-pelux
 
 Dependencies
 ------------
-
 This layer depends on:
 
 | meta layer          | git repo                                                      |
@@ -26,21 +25,21 @@ This layer depends on:
 
 The relationship with `meta-bistro`, which is also developed at Pelagicore,
 is that `meta-bistro` contains general software recipes and configurations,
-aimed at the IVI domain, but no distribution and no images, whereas meta-pelux
+aimed at the IVI domain, but no distribution and no images, whereas `meta-pelux`
 builds on top of meta-bistro by adding a distro and recipes to build complete
 system images.
 
 Branching
 ---------
-This repository will follow the yocto release system. Whenever a new yocto
+This repository will follow the Yocto release system. Whenever a new Yocto
 release has been released, a new branch with the same name will be created from
 the master branch.
 
 All feature growth should happen first on the master branch,
-but will also be cherry picked back to the latest yocto release branch.
+but will also be cherry-picked back to the latest Yocto release branch.
 Security and bug fixes will be evaluated case by case and backported as
 necessary. The ambition is to actively maintain the two latest releases and/or
-one year old releases in this fashion.
+one-year-old releases in this fashion.
 
 License and Copyright
 ---------------------
