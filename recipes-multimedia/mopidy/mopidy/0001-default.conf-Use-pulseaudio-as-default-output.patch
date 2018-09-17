@@ -1,0 +1,25 @@
+From 287330237be8097da475e83424326d560f361ac1 Mon Sep 17 00:00:00 2001
+From: Florent Revest <revestflo@gmail.com>
+Date: Mon, 17 Sep 2018 13:10:55 +0200
+Subject: [PATCH] default.conf: Use pulseaudio as default output
+
+---
+ mopidy/config/default.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mopidy/config/default.conf b/mopidy/config/default.conf
+index 7b99d86..db6a94e 100644
+--- a/mopidy/config/default.conf
++++ b/mopidy/config/default.conf
+@@ -15,7 +15,7 @@ config_file =
+ [audio]
+ mixer = software
+ mixer_volume =
+-output = autoaudiosink
++output = pulsesink server=127.0.0.1
+ buffer_time =
+ 
+ [proxy]
+-- 
+2.19.0
+

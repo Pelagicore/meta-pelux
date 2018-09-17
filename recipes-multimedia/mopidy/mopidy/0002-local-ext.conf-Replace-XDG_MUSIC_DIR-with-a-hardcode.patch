@@ -1,0 +1,28 @@
+From 92024d2de791b3cf015b9a29bbfbf7ff68904938 Mon Sep 17 00:00:00 2001
+From: Florent Revest <revestflo@gmail.com>
+Date: Mon, 17 Sep 2018 16:57:44 +0200
+Subject: [PATCH] local/ext.conf: Replace $XDG_MUSIC_DIR with a hardcoded
+ directory
+
+This envvar is not defined in PELUX anyway and other envvars such as
+$HOME are not expanded correctly and result in an empty media_dir var.
+---
+ mopidy/local/ext.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mopidy/local/ext.conf b/mopidy/local/ext.conf
+index b37a3a7..8997273 100644
+--- a/mopidy/local/ext.conf
++++ b/mopidy/local/ext.conf
+@@ -1,7 +1,7 @@
+ [local]
+ enabled = true
+ library = json
+-media_dir = $XDG_MUSIC_DIR
++media_dir = /home/root/Music/
+ scan_timeout = 1000
+ scan_flush_threshold = 100
+ scan_follow_symlinks = false
+-- 
+2.19.0
+
