@@ -32,6 +32,11 @@ IMAGE_INSTALL_append = "\
     can-utils \
 "
 
+# Media playback daemon
+IMAGE_INSTALL_append = "\
+    mopidy \
+"
+
 # OTA mechanism
 IMAGE_INSTALL_append_rpi = "\
     swupdate \
