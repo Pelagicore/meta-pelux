@@ -1,0 +1,9 @@
+[Unit]
+Description=PulseAudio System Daemon
+ 
+[Install]
+WantedBy=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/pulseaudio --system
