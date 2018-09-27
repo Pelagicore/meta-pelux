@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   Coprright (C) 2018 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -12,10 +13,14 @@ RDEPENDS_${PN}_append = "\
 HAS_CONTAINMENT = "${@bb.utils.contains('DISTRO_FEATURES', 'process-containment', '-c /opt/am/sc-config.yaml', '', d)}"
 
 #
-# Add software-container AM config to appman cmdline if we have containment
-# support
+# Add software-container AM config to appman cmdline if we have containment support
+# Also check out assets stored at Git LFS
 #
 do_install_prepend() {
+    cd ${WORKDIR}/git/
+    git lfs pull
+    cd -
+
     sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}|" ${WORKDIR}/neptune.service
 }
 
@@ -32,5 +37,5 @@ do_install_prepend_rpi() {
 
 RDEPENDS_${PN} += " qtquickcontrols-qmlplugins "
 
-FILES_${PN}-tests += "/usr/share/qt5/tests/neptune-qmltestsrunner/neptune-qmltestsrunner"
+FILES_${PN}-tests += "${datadir}/qt5/tests/neptune-qmltestsrunner/neptune-qmltestsrunner"
 PACKAGES =+ "${PN}-tests"
