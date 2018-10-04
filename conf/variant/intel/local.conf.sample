@@ -4,6 +4,8 @@ MACHINE = "intel-corei7-64"
 
 EFI_PROVIDER = "grub-efi"
 
+PREFERRED_PROVIDER_iasl-native = "iasl-native"
+
 WKS_FILE = "mkefidisk-multiboot.wks"
 
 IMAGE_INSTALL_append = " grub-efi"
