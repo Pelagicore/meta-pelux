@@ -3,9 +3,10 @@
 // Copyright (C) Luxoft Sweden AB 2018
 
 void buildPelux(String variant, String imageName) {
-    String peluxDir = "meta-pelux"
+    //String peluxLayer = "meta-pelux"
+    //String yoctoDir = "/vagrant/pelux_yocto"
     node("Yocto") {
-        dir(peluxDir) {
+        dir("meta-pelux") {
             checkout scm
         }
 
@@ -14,10 +15,11 @@ void buildPelux(String variant, String imageName) {
         sh "git clone https://github.com/Pelagicore/pelux-manifests.git"
 
         dir('pelux-manifests') {
-            def code = load "ci-scripts/yocto.groovy"
-            String peluxPath = "${env.WORKSPACE}/${peluxDir}"
-            code.buildWithLayer(variant, imageName, peluxDir, peluxPath)
+            def code = load 'ci-scripts/yocto.groovy'
+            //String peluxPath = "/vagrant/sucky-suck"
+            code.buildWithLayer(variant, imageName, "testA", "testB")
         }
+
     }
 }
 
