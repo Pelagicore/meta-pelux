@@ -14,4 +14,5 @@ IMAGE_INSTALL += "\
 	coreutils \
 	openssh-sftp-server \
 	packagegroup-bistro-debug-utils \
+	vim \
 "
