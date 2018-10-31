@@ -6,7 +6,7 @@ formatType: am-configuration
 ---
 containers:
   selection:
-    - com.pelagicore.radio: "softwarecontainer"
+    - com.pelagicore.calendar: "softwarecontainer"
     - "*": "process"
 
   softwarecontainer:
