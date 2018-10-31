@@ -8,6 +8,14 @@
           "id": "dbus",
           "config": [
             {
+             "dbus-gateway-config-session": [
+                {
+                  "direction": "*",
+                  "interface": "*",
+                  "object-path": "*",
+                  "method": "*"
+                }
+              ],
              "dbus-gateway-config-system": [
                 {
                   "direction": "*",
