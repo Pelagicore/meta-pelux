@@ -1,4 +1,4 @@
-Available PELUX images:
+Available PELUX images for arp:
 * core-image-pelux-minimal
 * core-image-pelux-minimal-dev
 
