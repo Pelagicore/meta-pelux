@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   Copyright (C) 2018 Pelagicore AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -9,4 +10,7 @@ inherit core-image-pelux-qtauto
 inherit populate_sdk_qt5
 
 # This image uses neptune as the reference UI, which is one of the addons in Qt Auto packagegroup
-IMAGE_INSTALL += " packagegroup-b2qt-automotive-addons "
+IMAGE_INSTALL_append = "\
+    coreutils \
+    packagegroup-b2qt-automotive-addons \
+"
