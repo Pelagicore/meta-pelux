@@ -32,7 +32,22 @@ void buildPelux(String variant, String imageName) {
 }
 
 def variantMap = [:]
-def variantList = env.VARIANT_LIST.split()
+def variantList = []
+
+// If VARIANT_LIST is defined in the Jenkins Environment
+// then use that, otherwise use the default
+// Note: This function will throw a NullPointerException if the
+//       variable is not set.
+try {
+    variantList = env.VARIANT_LIST.split()
+    echo "Using the specified variant list for build"
+    println "[\"${variantList.join('", "')}\"]"
+} catch(e) {
+    println("Using the default variant list for build. \nCaught error: " + e)
+    variantList = ['intel-qtauto:core-image-pelux-qtauto-neptune-dev',
+                    'rpi-qtauto:core-image-pelux-qtauto-neptune-dev']
+    println "[\"${variantList.join('", "')}\"]"
+}
 
 variantList.each {
     def list = it.split(":")
