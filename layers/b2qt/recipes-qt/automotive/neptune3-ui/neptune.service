@@ -4,7 +4,7 @@ After=dbus-session@root.service
 Requires=dbus-session@root.service
 
 [Service]
-ExecStart=/opt/neptune3/neptune3-ui -r --dbus session -c am-config.yaml -platform eglfs $EXTRA_ARGUMENTS
+ExecStart=/opt/neptune3/neptune3-ui -r --dbus session -c am-config-neptune.yaml -platform eglfs $EXTRA_ARGUMENTS
 Restart=on-failure
 WorkingDirectory=/opt/neptune3
 Environment=HOME=/home/%u/
