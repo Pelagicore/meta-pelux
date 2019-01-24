@@ -11,6 +11,7 @@ RDEPENDS_${PN}_append = "\
       "
 
 HAS_CONTAINMENT = "${@bb.utils.contains('DISTRO_FEATURES', 'process-containment', '-c /opt/am/sc-config.yaml', '', d)}"
+FORCE_SINGLE_PROCESS = "${@bb.utils.contains('MACHINE', 'raspberrypi3', ' --force-single-process', '', d)}"
 
 #
 # Add software-container AM config to appman cmdline if we have containment support
@@ -21,7 +22,7 @@ do_install_prepend() {
     git lfs pull
     cd -
 
-    sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}|" ${WORKDIR}/neptune.service
+    sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}${FORCE_SINGLE_PROCESS}|" ${WORKDIR}/neptune.service
 }
 
 #
