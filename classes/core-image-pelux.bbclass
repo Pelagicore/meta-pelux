@@ -33,9 +33,9 @@ IMAGE_INSTALL_append = "\
 "
 
 # Media playback daemon
-IMAGE_INSTALL_append = "\
-    mopidy \
-"
+#IMAGE_INSTALL_append = "\
+#    mopidy \
+#"
 
 # OTA mechanism
 IMAGE_INSTALL_append_rpi = "\
