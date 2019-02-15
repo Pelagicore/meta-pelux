@@ -9,3 +9,5 @@ PREFERRED_PROVIDER_iasl-native = "iasl-native"
 WKS_FILE = "mkefidisk-multiboot.wks"
 
 IMAGE_INSTALL_append = " grub-efi"
+
+KERNEL_MODULE_AUTOLOAD += "hid-multitouch video i915"

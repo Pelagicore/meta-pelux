@@ -11,3 +11,5 @@ WKS_FILE = "mkefidisk-multiboot.wks"
 IMAGE_INSTALL_append = " grub-efi"
 
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
+
+KERNEL_MODULE_AUTOLOAD += "hid-multitouch video i915"
