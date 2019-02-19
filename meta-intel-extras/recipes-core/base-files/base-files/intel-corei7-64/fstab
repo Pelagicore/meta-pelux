@@ -1,0 +1,3 @@
+/dev/root            /                    auto       defaults              1  1
+/dev/sda1	/boot	vfat	defaults	0	0
+/dev/sda4	swap	swap	defaults	0	0
