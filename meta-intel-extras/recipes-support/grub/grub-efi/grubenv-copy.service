@@ -1,5 +1,6 @@
 [Unit]
 Description=Service that copies grubenv to /boot/ after swupdate
+After=local-fs.target
 
 [Service]
 ExecStart=/usr/bin/grubenv-copy.sh
