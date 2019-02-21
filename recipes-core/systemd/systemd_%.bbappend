@@ -1,4 +1,3 @@
-
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 # This sets up a default ethernet on DHCP
@@ -19,6 +18,8 @@ do_install_append() {
         ln -sf ${systemd_unitdir}/system/getty@.service ${D}${sysconfdir}/systemd/system/getty.target.wants/getty@$ttydev.service
     done
 }
+
+EXTRA_OECONF = "myhostname"
 
 FILES_${PN} += "/etc/resolv.conf"
 FILES_${PN} += "${sysconfdir}/systemd/system/getty.target.wants"
