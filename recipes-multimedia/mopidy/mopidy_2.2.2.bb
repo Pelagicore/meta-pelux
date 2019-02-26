@@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
     python-pykka \
     python-requests \
     python-setuptools \
-    python-tornado \
+    python-tornado45 \
     python-xml \
     "
 
