@@ -38,5 +38,7 @@ RRECOMMENDS_${PN} = "\
     pulseaudio-module-native-protocol-tcp \
     "
 
+DEPENDS = "python-tornado45"
+
 FILES_${PN} += "${systemd_system_unitdir}/mopidy.service"
 SYSTEMD_SERVICE_${PN} = "mopidy.service"
