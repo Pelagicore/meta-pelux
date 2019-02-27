@@ -11,7 +11,7 @@ software = {
                 device = "/dev/mmcblk0p2";
             });
             scripts: ({
-                filename = "emmcsetup.lua";
+                filename = "emmcsetup1.lua";
                 type = "lua";
             });
             uboot: ({
@@ -27,7 +27,7 @@ software = {
                 device = "/dev/mmcblk0p3";
             });
             scripts: ({
-                filename = "emmcsetup.lua";
+                filename = "emmcsetup2.lua";
                 type = "lua";
             });
             uboot: ({

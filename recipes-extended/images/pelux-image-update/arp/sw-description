@@ -11,7 +11,7 @@ software = {
                 device = "/dev/sda2";
             });
             scripts: ({
-                filename = "emmcsetup.lua";
+                filename = "emmcsetup1.lua";
                 type = "lua";
             });
             bootenv: ({
@@ -27,7 +27,7 @@ software = {
                 device = "/dev/sda3";
             });
             scripts: ({
-                filename = "emmcsetup.lua";
+                filename = "emmcsetup2.lua";
                 type = "lua";
             });
             bootenv: ({

@@ -21,9 +21,15 @@ inherit swupdate
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/pelux-image-update/:"
 SRC_URI = " file://sw-description "
-SRC_URI_append_raspberrypi3 = " file://emmcsetup.lua "
-SRC_URI_append_intel-corei7-64 = " file://emmcsetup.lua "
-SRC_URI_append_arp = " file://emmcsetup.lua "
+SRC_URI_append_raspberrypi3 = " file://emmcsetup1.lua \
+                                file://emmcsetup2.lua \
+                              "
+SRC_URI_append_intel-corei7-64 = " file://emmcsetup1.lua \
+                                   file://emmcsetup2.lua \
+                                 "
+SRC_URI_append_arp = " file://emmcsetup1.lua \
+                       file://emmcsetup2.lua \
+                     "
 
 python do_swuimage_prepend () {
     # The swupdate.bbclass used from meta-swupdate expects the

@@ -1,0 +1,11 @@
+[Unit]
+Description=SWUpdate daemon
+Documentation=https://github.com/sbabic/swupdate
+Documentation=https://sbabic.github.io/swupdate
+After=grubenv-copy.service
+
+[Service]
+ExecStart=/usr/bin/swupdate -H $UPDATE_TARGET:1.0 -e stable,alt -f /etc/swupdate.cfg -l 5 -u '-t DEFAULT -c 1'
+
+[Install]
+WantedBy=multi-user.target

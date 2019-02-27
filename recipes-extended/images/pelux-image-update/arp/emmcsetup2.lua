@@ -13,7 +13,7 @@ end
 function cmdexec(cmd)
 	local ret, s, status = os.execute(cmd)
 	if (status ~= 0) then
-		return false, cmd .. " return with error"
+		return false, cmd .. " return with error " .. status
 	end
 
 	return true,""
@@ -33,7 +33,10 @@ function preinst()
 		return false, "Cannot find eMMC"
 	end
 
-	cmdexec("/usr/sbin/sfdisk -d " .. eMMC .. "> /tmp/dumppartitions")
+	ret, out = cmdexec("/usr/sbin/sfdisk -d " .. eMMC .. "> /tmp/dumppartitions")
+	if (false == ret) then
+		return ret, out
+	end
 
 	-- check if there are two identical partitions
 	-- and create the second one if no available
@@ -44,7 +47,12 @@ function preinst()
 	while (t ~= nil) do
 		j=0
 		j=string.find(t, "/dev/sda3")
-		fo:write(t .. "\n")
+		ret, out = fo:write(t .. "\n")
+		if (ret == nil) then
+			fo:close()
+			f:close()
+			return false, out
+		end
 		if (j == 1) then
 			found=true
 			break
@@ -65,21 +73,58 @@ function preinst()
 	start=start+size
 	partitions = eMMC .. "3 : start=    " .. string.format("%d", start) .. ", size=  " .. size .. ", type=83\n"
 
-	fo:write(partitions)
+	ret, out = fo:write(partitions)
 	fo:close()
 	f:close()
+
+	if (ret == nil) then
+		return ret, out
+	end
 
 	out = os.capture("/usr/sbin/sfdisk --force " .. eMMC .. " < /tmp/partitions")
 
 	-- use partprobe to inform the kernel of the new partitions
 
-	cmdexec("/usr/sbin/partprobe " .. eMMC)
+	ret, out = cmdexec("/usr/sbin/partprobe " .. eMMC)
+	if (false == ret) then
+		return false, out
+	end
 
 	return true, out
 end
 
 function postinst()
 	local out = "Post installed script called"
+
+	ret, out = cmdexec("mkdir -p /tmp/mountedsda3")
+	if (false == ret) then
+		return ret, out
+	end
+
+	ret, out = cmdexec("mount /dev/sda3 /tmp/mountedsda3")
+	if (false == ret) then
+		return ret, out
+	end
+
+	ret, out = cmdexec("sed -i -e 's/alt/main/' /tmp/mountedsda3/lib/systemd/system/swupdate.service")
+	if (false == ret) then
+		return ret, out
+	end
+
+	ret, out = cmdexec("sed -i -e 's/-c [0-3]/-c 2/' /tmp/mountedsda3/lib/systemd/system/swupdate.service")
+	if (false == ret) then
+		return ret, out
+	end
+
+	ret, out = cmdexec("umount /tmp/mountedsda3")
+	if (false == ret) then
+		return ret, out
+	end
+
+	ret, out = cmdexec("rm -rf /tmp/mountedsda3")
+	if (false == ret) then
+		return ret, out
+	end
 
 	return true, out
 end
