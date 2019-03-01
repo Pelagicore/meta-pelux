@@ -29,7 +29,7 @@ RDEPENDS_${PN} += "\
     python-pykka \
     python-requests \
     python-setuptools \
-    python-tornado \
+    python-tornado45 \
     python-xml \
     "
 
@@ -37,8 +37,6 @@ RRECOMMENDS_${PN} = "\
     pulseaudio-server \
     pulseaudio-module-native-protocol-tcp \
     "
-
-DEPENDS = "python-tornado45"
 
 FILES_${PN} += "${systemd_system_unitdir}/mopidy.service"
 SYSTEMD_SERVICE_${PN} = "mopidy.service"
