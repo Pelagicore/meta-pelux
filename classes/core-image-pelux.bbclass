@@ -26,6 +26,11 @@ IMAGE_INSTALL_append = "\
     node-state-manager \
 "
 
+# Alexa SDK
+IMAGE_INSTALL_append = "\
+    avs-device-sdk     \
+"
+
 # CAN utilities
 IMAGE_INSTALL_append = "\
     libsocketcan \
