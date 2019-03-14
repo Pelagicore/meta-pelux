@@ -10,3 +10,5 @@ WKS_FILE = "mkefidisk-multiboot.wks"
 WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
 
 IMAGE_INSTALL_append = " grub-efi"
+
+LICENSE_FLAGS_WHITELIST = "commercial_faad2"
