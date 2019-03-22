@@ -15,4 +15,6 @@ IMAGE_INSTALL += "\
 	openssh-sftp-server \
 	packagegroup-bistro-debug-utils \
 	vim \
+    qtdeclarative-tools \
+    qtwayland-examples \
 "

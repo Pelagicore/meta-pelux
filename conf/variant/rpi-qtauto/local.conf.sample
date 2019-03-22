@@ -5,3 +5,8 @@ MACHINE = "raspberrypi3"
 RPI_USE_U_BOOT = "1"
 
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
+
+
+# Improves build time a lot
+# DISTRO_FEATURES_remove = "webengine"
+
