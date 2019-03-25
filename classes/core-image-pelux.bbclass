@@ -28,6 +28,7 @@ IMAGE_INSTALL_append = "\
 
 # Alexa SDK
 IMAGE_INSTALL_append = "\
+    portaudio-v19      \
     avs-device-sdk     \
 "
 
