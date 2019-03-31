@@ -1,6 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
-#   Copyright (C) 2018 Luxoft Sweden AB
+#   Copyright (C) 2018-2019 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -43,17 +43,12 @@ IMAGE_INSTALL_append = "\
 "
 
 # OTA mechanism
-IMAGE_INSTALL_append_rpi = "\
-    swupdate \
-"
-
-IMAGE_INSTALL_append_intel-corei7-64 = "\
+IMAGE_INSTALL_append = "\
     swupdate \
 "
 
 IMAGE_INSTALL_append_arp = "\
     arp-driver \
-    swupdate \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
