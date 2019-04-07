@@ -1,14 +1,15 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
-#   Coprright (C) 2018 Luxoft Sweden AB
+#   Coprright (C) 2018-2019 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 RDEPENDS_${PN}_append = "\
-      dbus-session       \
-      "
+    dbus-session \
+    otf-noto-arabic \
+"
 
 HAS_CONTAINMENT = "${@bb.utils.contains('DISTRO_FEATURES', 'process-containment', '-c /opt/am/sc-config.yaml', '', d)}"
 FORCE_SINGLE_PROCESS = "${@bb.utils.contains('MACHINE', 'raspberrypi3', ' --force-single-process', '', d)}"
