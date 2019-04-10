@@ -12,6 +12,7 @@ Environment=LC_ALL=en_US
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/root/dbus/user_bus_socket
 Environment=QT_IM_MODULE=qtvirtualkeyboard
 Environment=XDG_RUNTIME_DIR=/tmp
+Environment=QTWEBENGINE_CHROMIUM_FLAGS="--no-sandbox --single-process"
 
 [Install]
 WantedBy=multi-user.target
