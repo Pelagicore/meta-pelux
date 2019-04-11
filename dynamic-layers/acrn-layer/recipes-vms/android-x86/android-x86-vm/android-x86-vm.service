@@ -1,0 +1,16 @@
+[Unit]
+Description=Start Android-x86 UOS
+After=acrnprobe.service
+After=weston.service
+After=systemd-resolved.service
+
+ConditionPathExists=/sys/kernel/gvt
+ConditionPathExists=/dev/acrn_vhm
+
+[Service]
+Type=simple
+RemainAfterExit=false
+ExecStart=/bin/sh /usr/share/acrn/scripts/launch_android_x86.sh
+
+[Install]
+WantedBy=acrn-vm2.target
