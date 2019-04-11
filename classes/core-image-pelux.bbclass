@@ -47,6 +47,11 @@ IMAGE_INSTALL_append = "\
     swupdate \
 "
 
+# We do not support swupdate on qemu
+IMAGE_INSTALL_remove_qemux86-64 = "\
+    swupdate \
+"
+
 IMAGE_INSTALL_append_arp = "\
     arp-driver \
 "
