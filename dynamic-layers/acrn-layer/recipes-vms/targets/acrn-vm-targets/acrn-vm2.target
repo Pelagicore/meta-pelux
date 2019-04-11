@@ -1,0 +1,9 @@
+[Unit]
+Description=Second ACRN VM to start
+After=acrn-vm-init.service
+Requires=acrn-vm-init.service
+Before=acrn-vm3.target
+Wants=acrn-vm3.target
+
+[Install]
+WantedBy=multi-user.target
