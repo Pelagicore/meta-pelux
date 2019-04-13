@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   Copyright (C) 2019 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -11,6 +12,7 @@ inherit core-image-pelux
 QTAUTO_COMPONENTS = " \
     qtapplicationmanager \
     qtivi \
+    qtivi-mopidy-plugin \
     qtvirtualkeyboard \
 "
 
