@@ -16,6 +16,7 @@ PYPI_PACKAGE = "Mopidy"
 inherit pypi setuptools systemd
 
 do_install_append() {
+    install -d ${D}/${ROOT_HOME}/Music
     install -d ${D}/${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/mopidy.service ${D}/${systemd_system_unitdir}
 }
@@ -38,5 +39,9 @@ RRECOMMENDS_${PN} = "\
     pulseaudio-module-native-protocol-tcp \
     "
 
-FILES_${PN} += "${systemd_system_unitdir}/mopidy.service"
+FILES_${PN} += " \
+    ${ROOT_HOME}/Music \
+    ${systemd_system_unitdir}/mopidy.service \
+    "
+
 SYSTEMD_SERVICE_${PN} = "mopidy.service"
