@@ -13,9 +13,9 @@ do_install_append() {
     install -d ${D}${datadir}
     install -d ${D}${systemd_system_unitdir}
 
-    install -m 0755 ${WORKDIR}/grubenv ${D}${datadir}
+    install -m 0644 ${WORKDIR}/grubenv ${D}${datadir}
     install -m 0755 ${WORKDIR}/grubenv-copy.sh ${D}${bindir}
-    install -m 0755 ${WORKDIR}/grubenv-copy.service ${D}${systemd_system_unitdir}
+    install -m 0644 ${WORKDIR}/grubenv-copy.service ${D}${systemd_system_unitdir}
 }
 
 FILES_${PN} += " \
