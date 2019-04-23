@@ -1,0 +1,17 @@
+[Unit]
+Description=Start PELUX UOS
+After=acrnprobe.service
+After=weston.service
+After=systemd-resolved.service
+Before=acrn-vm2.target
+
+ConditionPathExists=/sys/kernel/gvt
+ConditionPathExists=/dev/acrn_vhm
+
+[Service]
+Type=simple
+RemainAfterExit=false
+ExecStart=/bin/sh /usr/share/acrn/scripts/launch_pelux.sh
+
+[Install]
+WantedBy=acrn-vm1.target
