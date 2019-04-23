@@ -1,0 +1,9 @@
+[Unit]
+Description=ACRN Initialization procedure
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/acrn/scripts/acrn-vm-init.sh
+
+[Install]
+WantedBy=multi-user-target
