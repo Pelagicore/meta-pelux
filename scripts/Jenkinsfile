@@ -15,6 +15,22 @@ void buildPelux(String variant, String imageName) {
     }
 
     node("Yocto") {
+        // If there is a build for this PR in progress, abort it
+        script {
+            def jobname = env.JOB_NAME
+            def buildnum = env.BUILD_NUMBER.toInteger()
+            def job = Jenkins.instance.getItemByFullName(jobname)
+
+            for (build in job.builds) {
+                if (!build.isBuilding()) {
+                    continue;
+                }
+
+                println("Aborting previous running build #${build.number}...") 
+
+                build.doStop();
+            }
+        }
         dir(peluxDir) {
             checkout scm
         }
