@@ -39,6 +39,9 @@
           "id": "devicenode",
           "config": [
             {
+              "name": "/dev/dri/card0"
+            },
+            {
               "name": "/dev/dri/renderD128"
             },
             {
