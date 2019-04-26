@@ -9,6 +9,7 @@ BusName=com.pelagicore.SoftwareContainerAgent
 ExecStart=/usr/bin/softwarecontainer-agent
 Environment=XDG_RUNTIME_DIR=/tmp
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/root/dbus/user_bus_socket
+Environment=WAYLAND_DISPLAY="qtam-wayland-0"
 
 [Install]
 WantedBy=basic.target
