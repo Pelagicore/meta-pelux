@@ -2,12 +2,12 @@
 # long-description: Creates a partitioned EFI disk image that the user
 # can directly dd to boot media.
 
-part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --ondisk sda --label msdos --active --align 1024
+part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --label msdos --active --align 1024 --uuid 279767e4-75b9-4b6b-92ca-cddbe821e3a6
 
-part / --source rootfs --ondisk sda --fstype=ext4 --label platform --align 1024
+part / --source rootfs --fstype=ext4 --label platform1 --align 1024 --uuid 4f531a2e-d931-4308-8ccd-d2262b910bad
 
-part / --source rootfs --ondisk sda --fstype=ext4 --label platform --align 1024
+part / --source rootfs --fstype=ext4 --label platform2 --align 1024 --uuid 12586f0b-38ad-42b8-8340-fe9d08db7139
 
-part swap --ondisk sda --size 44 --label swap1 --fstype=swap
+part swap --size 44 --label swap1 --fstype=swap --uuid 36e409e3-bec6-4d36-9d93-51f917421531
 
 bootloader --configfile cfg --ptable gpt --timeout=5 --append="rootfstype=ext4 console=ttyS0,115200 console=tty0"
