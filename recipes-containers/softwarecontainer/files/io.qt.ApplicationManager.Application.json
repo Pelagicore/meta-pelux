@@ -36,6 +36,40 @@
           ]
         },
         {
+          "id": "file",
+          "config": [
+            {
+              "path-host": "/run",
+              "path-container": "/run",
+              "read-only": true
+            },
+            {
+              "path-host": "/etc/ssl",
+              "path-container": "/etc/ssl",
+              "read-only": true
+            }
+          ]
+        },
+        {
+          "id":"network",
+          "config": [
+            {
+              "direction": "OUTGOING",
+              "allow": [
+                { "host": "*", "protocols": ["udp", "tcp"], "ports": 53 },
+                { "host": "*", "protocols": "tcp", "ports": [80, 443] }
+              ]
+            },
+            {
+              "direction": "INCOMING",
+              "allow": [
+                { "host": "*", "protocols": ["udp", "tcp"], "ports": 53 },
+                { "host": "*", "protocols": "tcp", "ports": [80, 443] }
+              ]
+            }
+          ]
+        },
+        {
           "id": "devicenode",
           "config": [
             {
