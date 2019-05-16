@@ -52,6 +52,11 @@ IMAGE_INSTALL_remove_qemux86-64 = "\
     swupdate \
 "
 
+# Connectivity Manager
+IMAGE_INSTALL_append = "\
+    connectivity-manager \
+"
+
 IMAGE_INSTALL_append_arp = "\
     arp-driver \
 "
