@@ -13,6 +13,7 @@ QTAUTO_COMPONENTS = " \
     qtapplicationmanager \
     qtivi \
     qtivi-mopidy-plugin \
+    qttools-tools \
     qtvirtualkeyboard \
 "
 
