@@ -12,5 +12,3 @@ WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
 IMAGE_INSTALL_append = " grub-efi"
 
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
-
-KERNEL_MODULE_AUTOLOAD += "hid-multitouch video i915"
