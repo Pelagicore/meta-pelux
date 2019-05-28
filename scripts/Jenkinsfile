@@ -23,10 +23,15 @@ void buildPelux(String variant, String imageName) {
         sh "rm -rf pelux-manifests/"
         sh "git clone https://github.com/Pelagicore/pelux-manifests.git -b ${branchName}"
         println("Using the specified branch for build: ${branchName}")
+        sh "cp -R ${peluxDir} pelux-manifests/${peluxDir}"
         dir('pelux-manifests') {
-            def code = load "ci-scripts/yocto.groovy"
+            def customImage = docker.image("pelux/pelux-yocto:yoctouser")
             String peluxPath = "${env.WORKSPACE}/${peluxDir}"
-            code.buildWithLayer(variant, imageName, peluxDir, peluxPath)
+            customImage.inside("-v $WORKSPACE/pelux-manifests:/workspace -v /var/yocto-cache:/var/yocto-cache --cap-add=NET_ADMIN --device=/dev/net/tun") {
+                def code = load "ci-scripts/yocto2.groovy"
+                String metaPath = "/workspace/${peluxDir}"
+                code.buildWithLayer(variant, imageName, peluxDir, metaPath)
+            }
         }
     }
 }
