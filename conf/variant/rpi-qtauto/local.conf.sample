@@ -7,3 +7,5 @@ RPI_USE_U_BOOT = "1"
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
 
 PREFERRED_PROVIDER_u-boot-fw-utils = "u-boot-fw-utils"
+
+IMAGE_CLASSES_append = " dualpart_image-rpi"
