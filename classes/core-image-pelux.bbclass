@@ -61,7 +61,10 @@ IMAGE_INSTALL_append_arp = "\
     arp-driver \
 "
 
-TOOLCHAIN_HOST_TASK += "nativesdk-cmake"
+TOOLCHAIN_HOST_TASK += "\
+    nativesdk-cmake \
+    nativesdk-meson \
+"
 
 IMAGE_ROOTFS_SIZE ?= "1000000"
 IMAGE_FSTYPES ?= "ext3 sdcard"
