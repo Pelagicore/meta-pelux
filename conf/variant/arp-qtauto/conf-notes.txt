@@ -1,7 +1,12 @@
 Available PELUX images for arp-qtauto:
 * core-image-pelux-minimal
 * core-image-pelux-minimal-dev
+* core-image-pelux-minimal-update
+* core-image-pelux-minimal-dev-update
+
 * core-image-pelux-qtauto-neptune
 * core-image-pelux-qtauto-neptune-dev
+* core-image-pelux-qtauto-neptune-update
+* core-image-pelux-qtauto-neptune-dev-update
 
 Build them by running: bitbake <image>
