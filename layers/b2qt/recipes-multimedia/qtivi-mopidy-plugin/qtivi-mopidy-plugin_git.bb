@@ -8,7 +8,7 @@ DEPENDS = "qtbase qtwebsockets qtivi"
 RDEPENDS_${PN} = "qtivi"
 
 SRC_URI = "git://github.com/Pelagicore/qtivi-mopidy-plugin.git;protocol=https"
-SRCREV = "18198a616501bca072689a31c1581c879605da68"
+SRCREV = "538a7ba9940e13a4028c5258a8ace5693429e1c9"
 
 S = "${WORKDIR}/git"
 
