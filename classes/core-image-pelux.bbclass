@@ -63,6 +63,7 @@ IMAGE_INSTALL_append_arp = "\
 
 TOOLCHAIN_HOST_TASK += "\
     nativesdk-cmake \
+    nativesdk-gdbus-codegen-glibmm \
     nativesdk-meson \
 "
 
