@@ -3,8 +3,8 @@ HOMEPAGE = "https://www.mopidy.com/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[md5sum] = "62491cae99dd867556a3d3bba3309dde"
-SRC_URI[sha256sum] = "b41f5ab1e83c5e5f74fdb792c8fd5ba63b7fd227d04df266dba5189bc552a93d"
+SRC_URI[md5sum] = "e791afa0e4a1926963433c8c5f3be63b"
+SRC_URI[sha256sum] = "361913efcb97afc18752d1ebce688f120955a19dae2e9a2b5c29aa6d20044fbf"
 
 SRC_URI += "\
     file://0001-default.conf-Use-pulseaudio-as-default-output.patch \
