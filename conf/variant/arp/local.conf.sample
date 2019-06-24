@@ -2,6 +2,8 @@ require conf/variant/common/local.conf
 
 MACHINE = "arp"
 
+IMAGE_FSTYPES += "wic wic.bmap"
+
 EFI_PROVIDER = "grub-efi"
 
 PREFERRED_PROVIDER_iasl-native = "iasl-native"

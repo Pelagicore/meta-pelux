@@ -2,6 +2,8 @@ require conf/variant/common/local.conf
 
 MACHINE = "intel-corei7-64"
 
+IMAGE_FSTYPES += "wic wic.bmap"
+
 EFI_PROVIDER = "grub-efi"
 
 PREFERRED_PROVIDER_iasl-native = "iasl-native"
