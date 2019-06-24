@@ -4,6 +4,8 @@ MACHINE = "arp"
 
 EFI_PROVIDER = "grub-efi"
 
+IMAGE_FSTYPES += "wic wic.bmap"
+
 PREFERRED_PROVIDER_iasl-native = "iasl-native"
 
 WKS_FILE = "mkefidisk-multiboot.wks"
