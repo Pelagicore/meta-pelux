@@ -19,6 +19,12 @@ IMAGE_INSTALL_append = "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
 "
 
+# Include udev-extraconf for automatic mounting of pluggable mass storage
+# devices (other parts are stripped out).
+IMAGE_INSTALL_append = "\
+    udev-extraconf \
+"
+
 # GENIVI components
 IMAGE_INSTALL_append = "\
     dlt-daemon         \

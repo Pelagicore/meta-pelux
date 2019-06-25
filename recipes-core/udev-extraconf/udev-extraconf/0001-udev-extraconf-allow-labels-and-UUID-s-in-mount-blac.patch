@@ -1,0 +1,51 @@
+From 1aa8f8af363518578437ac6921754e1e175b6943 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Tue, 25 Jun 2019 15:06:06 +0200
+Subject: [PATCH] udev-extraconf: allow labels and UUID:s in mount blacklists
+
+Needed for systems were device nodes are not known when an image is built
+but there are partitions that should not be automatically mounted.
+
+Example of output line from added lsblk invocation:
+
+LABEL="Test" PARTLABEL="Test" UUID="8097dcca-dd50-4e2d-8be0-d242f29a6747" PARTUUID="85aaf782-01
+
+Removing " with sed allows for using the same format in the blacklist files
+as in /etc/fstab, were " is not used, to refer to a device.
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ meta/recipes-core/udev/udev-extraconf/mount.sh | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+diff --git a/meta/recipes-core/udev/udev-extraconf/mount.sh b/meta/recipes-core/udev/udev-extraconf/mount.sh
+index 3ee67b1318..f655c7003d 100644
+--- a/meta/recipes-core/udev/udev-extraconf/mount.sh
++++ b/meta/recipes-core/udev/udev-extraconf/mount.sh
+@@ -26,13 +26,18 @@ fi
+ 
+ PMOUNT="/usr/bin/pmount"
+ 
++# Allow for blacklisting devices with device names, LABEL/PARTLABEL=<label> and UUID/PARTUUID=<uuid>.
++LSBLK_OUTPUT=`lsblk -P -o LABEL,PARTLABEL,UUID,PARTUUID $DEVNAME | sed s/\"//g`
++
+ for line in `grep -h -v ^# /etc/udev/mount.blacklist /etc/udev/mount.blacklist.d/*`
+ do
+-	if [ ` expr match "$DEVNAME" "$line" ` -gt 0 ];
+-	then
+-		logger "udev/mount.sh" "[$DEVNAME] is blacklisted, ignoring"
+-		exit 0
+-	fi
++	for m in $DEVNAME $LSBLK_OUTPUT; do
++		if [ ` expr match "$m" "$line" ` -gt 0 ];
++		then
++			logger "udev/mount.sh" "[$DEVNAME] is blacklisted, ignoring"
++			exit 0
++		fi
++	done
+ done
+ 
+ automount_systemd() {
+-- 
+2.22.0
+
