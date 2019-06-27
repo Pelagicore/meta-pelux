@@ -4,7 +4,7 @@ MACHINE = "arp"
 
 EFI_PROVIDER = "grub-efi"
 
-IMAGE_FSTYPES += "wic wic.bmap"
+IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
 
 PREFERRED_PROVIDER_iasl-native = "iasl-native"
 

@@ -2,7 +2,7 @@ require conf/variant/common/local.conf
 
 MACHINE = "arp"
 
-IMAGE_FSTYPES += "wic wic.bmap"
+IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
 
 EFI_PROVIDER = "grub-efi"
 
