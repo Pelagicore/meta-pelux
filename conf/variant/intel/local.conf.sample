@@ -2,7 +2,7 @@ require conf/variant/common/local.conf
 
 MACHINE = "intel-corei7-64"
 
-IMAGE_FSTYPES += "wic wic.bmap"
+IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
 
 EFI_PROVIDER = "grub-efi"
 
