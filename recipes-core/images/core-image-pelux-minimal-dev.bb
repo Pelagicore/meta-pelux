@@ -7,7 +7,7 @@
 require core-image-pelux-minimal.bb
 
 # Development stuff
-IMAGE_FEATURES += "tools-debug tools-testapps"
+IMAGE_FEATURES += "tools-debug"
 
 IMAGE_INSTALL_append = "\
     openssh-sftp-server \
