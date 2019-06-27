@@ -8,21 +8,16 @@ inherit core-image
 
 IMAGE_FEATURES += "package-management debug-tweaks"
 
-# Include softwarecontainer only if the process-containment feature has been enabled
-IMAGE_INSTALL_append = "\
-    ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
-"
-
-# Include bluetooth if the machine supports it (MACHINE_FEATURES), and it has
-# been selected in DISTRO_FEATURES.
 IMAGE_INSTALL_append = "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "process-containment", "softwarecontainer", "", d)} \
+    swupdate \
+    udev-extraconf \
 "
 
-# Include udev-extraconf for automatic mounting of pluggable mass storage
-# devices (other parts are stripped out).
-IMAGE_INSTALL_append = "\
-    udev-extraconf \
+# We do not support swupdate on qemu
+IMAGE_INSTALL_remove_qemux86-64 = "\
+    swupdate \
 "
 
 # GENIVI components
@@ -32,35 +27,13 @@ IMAGE_INSTALL_append = "\
     node-state-manager \
 "
 
-# Alexa SDK
+# Should probably be included in some other way (dependency, package group, feature).
 IMAGE_INSTALL_append = "\
     avs-device-sdk     \
-"
-
-# CAN utilities
-IMAGE_INSTALL_append = "\
-    libsocketcan \
     can-utils \
-"
-
-# Media playback daemon
-IMAGE_INSTALL_append = "\
-    mopidy \
-"
-
-# OTA mechanism
-IMAGE_INSTALL_append = "\
-    swupdate \
-"
-
-# We do not support swupdate on qemu
-IMAGE_INSTALL_remove_qemux86-64 = "\
-    swupdate \
-"
-
-# Connectivity Manager
-IMAGE_INSTALL_append = "\
     connectivity-manager \
+    libsocketcan \
+    mopidy \
 "
 
 IMAGE_INSTALL_append_arp = "\
