@@ -34,6 +34,7 @@ IMAGE_INSTALL_append = "\
     connectivity-manager \
     libsocketcan \
     mopidy \
+    user-identification-manager \
 "
 
 IMAGE_INSTALL_append_arp = "\
