@@ -1,2 +1,1 @@
 /dev/root            /                    auto       defaults              1  1
-/dev/mmcblk0p1       /boot                auto       defaults,sync         0  0
