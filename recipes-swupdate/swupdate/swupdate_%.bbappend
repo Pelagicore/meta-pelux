@@ -5,6 +5,8 @@ SRC_URI += " \
      file://swupdate.service \
      "
 
+RDEPENDS = "blktool"
+
 do_install_append() {
     sed -i -e "s|\$UPDATE_TARGET|${MACHINE}|" ${WORKDIR}/swupdate.service
 
