@@ -5,6 +5,8 @@ SRC_URI +=  "\
     file://pelux-roots.blacklist \
 "
 
+RDEPENDS_${PN}_append = " util-linux-lsblk"
+
 do_install_append() {
     install -m 0644 ${WORKDIR}/pelux-roots.blacklist ${D}${sysconfdir}/udev/mount.blacklist.d
 
