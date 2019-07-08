@@ -1,5 +1,5 @@
 /dev/root                                       /       auto    defaults        1       1
 PARTUUID=533a0bc2-8de5-11e9-b7c5-4fc76f6948de	/boot	vfat	defaults	0	0
 PARTUUID=5ffda79c-8de5-11e9-b8ca-73b4a02c6760	swap	swap	defaults	0	0
-PARTUUID=88e6de58-8de5-11e9-a034-0be78a518c85   /media  ext4    defaults        0       0
+PARTUUID=88e6de58-8de5-11e9-a034-0be78a518c85   /data   ext4    defaults        0       0
 
