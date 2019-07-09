@@ -16,7 +16,7 @@ inherit qmake5
 
 do_install() {
     install -m 0755 -d ${D}${libdir}/plugins/qtivi/
-    install -m 0644 ${WORKDIR}/build/libmedia_mopidy.so ${D}${libdir}/plugins/qtivi/
+    install -m 0644 ${WORKDIR}/build/libmedia_mopidy.so ${D}${libdir}/plugins/qtivi/libzzmedia_mopidy_experimental.so
 }
 
 FILES_${PN} += "${libdir}/plugins/qtivi/"
