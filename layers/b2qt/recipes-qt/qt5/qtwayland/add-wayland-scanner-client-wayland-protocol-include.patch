@@ -1,0 +1,12 @@
+diff --git a/src/hardwareintegration/client/brcm-egl/brcm-egl.pri b/src/hardwareintegration/client/brcm-egl/brcm-egl.pri
+index f9f8d072..74292783 100644
+--- a/src/hardwareintegration/client/brcm-egl/brcm-egl.pri
++++ b/src/hardwareintegration/client/brcm-egl/brcm-egl.pri
+@@ -1,6 +1,7 @@
+ INCLUDEPATH += $$PWD
+
+ QMAKE_USE += egl wayland-client libdl
++CONFIG += wayland-scanner-client-wayland-protocol-include
+ QT += egl_support-private
+
+ SOURCES += $$PWD/qwaylandbrcmeglintegration.cpp \
