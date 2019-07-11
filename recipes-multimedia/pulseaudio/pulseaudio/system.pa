@@ -33,7 +33,7 @@ load-module module-esound-protocol-unix
 .ifexists module-native-protocol-tcp.so
 load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
 .endif
-load-module module-native-protocol-unix
+load-module module-native-protocol-unix auth-anonymous=1
 
 ### Automatically restore the volume of streams and devices
 load-module module-stream-restore
