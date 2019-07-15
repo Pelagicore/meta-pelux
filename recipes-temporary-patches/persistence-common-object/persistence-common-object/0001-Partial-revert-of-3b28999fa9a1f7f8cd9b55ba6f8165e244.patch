@@ -1,0 +1,148 @@
+From 3f4c6aa2c9a433b2a772a5d196b6f7d9fc2c6bf9 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Fri, 12 Jul 2019 15:57:44 +0200
+Subject: [PATCH] Partial revert of 3b28999fa9a1f7f8cd9b55ba6f8165e2447038fc
+
+Revert "Added library constructor/destructor to call
+DLT_REGISTER_CONTEXT/DLT_UNREGISTER_CONTEXT" part. Originally made in
+src/key-value-store and copied to src/sqlite so revert change there as
+well.
+
+Calling DLT_REGISTER_CONTEXT in a constructor function is problematic
+because:
+
+- DLT documentation specifically mentions in multiple places that
+  DLT_REGISTER_CONTEXT must not be called before DLT_REGISTER_APP. Unclear
+  what the consequences are if this is done.
+
+- Services that fork() can not use DLT even if they themselves are careful
+  not to perform and calls to DLT until after fork(). This is supported and
+  specifically tested for in DLT. DLT_REGISTER_CONTEXT from constructor
+  function will call dlt_init(), that monitors for fork() with
+  pthread_atfork(), in wrong process. End result is that nothing is ever
+  sent from the main daemon process to the DLT daemon.
+
+Have verified that DLT logging in persistence-administrator does not work
+without this patch but works with it applied.
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ .../pers_low_level_db_access.c                | 36 ++++++++----------
+ src/sqlite/pers_low_level_db_access.c         | 37 ++++++++-----------
+ 2 files changed, 30 insertions(+), 43 deletions(-)
+
+diff --git a/src/key-value-store/pers_low_level_db_access.c b/src/key-value-store/pers_low_level_db_access.c
+index c8199d2..9e6eb64 100644
+--- a/src/key-value-store/pers_low_level_db_access.c
++++ b/src/key-value-store/pers_low_level_db_access.c
+@@ -145,27 +145,6 @@ static int openCache(KISSDB* db);
+ //static int addCache(KISSDB* db);
+ static int closeCache(KISSDB* db);
+ 
+-
+-__attribute__((constructor))
+-static void pco_library_init()
+-{
+-   pid_t pid = getpid();
+-   str_t dltContextID[16]; /* should be at most 4 characters string, but colissions occure */
+-
+-   /* init DLT */
+-   (void) snprintf(dltContextID, sizeof(dltContextID), "Pers_%04d", pid);
+-   DLT_REGISTER_CONTEXT(persComLldbDLTCtx, dltContextID, "PersCommonLLDB");
+-   //DLT_SET_APPLICATION_LL_TS_LIMIT(DLT_LOG_INFO, DLT_TRACE_STATUS_OFF);
+-   DLT_LOG(persComLldbDLTCtx, DLT_LOG_INFO, DLT_STRING(LT_HDR); DLT_STRING(__FUNCTION__); DLT_STRING(":"); DLT_STRING("register context PersCommonLLDB ContextID="); DLT_STRING(dltContextID));
+-}
+-
+-__attribute__((destructor))
+-static void pco_library_destroy()
+-{
+-   DLT_UNREGISTER_CONTEXT(persComLldbDLTCtx);
+-}
+-
+-
+ /**
+  * \open or create a key-value database
+  * \note : DB type is identified from dbPathname (based on extension)
+@@ -189,9 +168,24 @@ sint_t pers_lldb_open(str_t const* dbPathname, pers_lldb_purpose_e ePurpose, boo
+    int incRefCounter = 1;  // default increment counter
+    lldb_handler_s* pLldbHandler = NIL;
+    sint_t returnValue = PERS_COM_FAILURE;
++   static bool_t bFirstCall = true;
+ 
+    path = dbPathname;
+ 
++   if (bFirstCall)
++   {
++      pid_t pid = getpid();
++      str_t dltContextID[16]; /* should be at most 4 characters string, but colissions occure */
++
++      bFirstCall = false;
++
++      /* init DLT */
++      (void) snprintf(dltContextID, sizeof(dltContextID), "Pers_%04d", pid);
++      DLT_REGISTER_CONTEXT(persComLldbDLTCtx, dltContextID, "PersCommonLLDB");
++      //DLT_SET_APPLICATION_LL_TS_LIMIT(DLT_LOG_INFO, DLT_TRACE_STATUS_OFF);
++      DLT_LOG(persComLldbDLTCtx, DLT_LOG_INFO, DLT_STRING(LT_HDR); DLT_STRING(__FUNCTION__); DLT_STRING(":"); DLT_STRING("register context PersCommonLLDB ContextID="); DLT_STRING(dltContextID));
++   }
++
+    DLT_LOG(persComLldbDLTCtx, DLT_LOG_INFO,
+            DLT_STRING(LT_HDR); DLT_STRING(__FUNCTION__); DLT_STRING("Begin opening:"); DLT_STRING("<"); DLT_STRING(dbPathname); DLT_STRING(">, ");
+            ((PersLldbPurpose_RCT == ePurpose) ? DLT_STRING("RCT, ") : DLT_STRING("DB, ")); ((true == bForceCreationIfNotPresent) ? DLT_STRING("forced, ") : DLT_STRING("unforced, ")));
+diff --git a/src/sqlite/pers_low_level_db_access.c b/src/sqlite/pers_low_level_db_access.c
+index 17b1acb..62320f2 100644
+--- a/src/sqlite/pers_low_level_db_access.c
++++ b/src/sqlite/pers_low_level_db_access.c
+@@ -130,28 +130,6 @@ static const char *gSqlPragSynchroOff     = "PRAGMA synchronous = OFF";
+ #endif
+ 
+ 
+-
+-/* ---------------------- local functions  --------------------------------- */
+-__attribute__((constructor))
+-static void pco_library_init()
+-{
+-   pid_t pid = getpid();
+-   str_t dltContextID[16]; /* should be at most 4 characters string, but colissions occure */
+-
+-   /* init DLT */
+-   (void) snprintf(dltContextID, sizeof(dltContextID), "Pers_%04d", pid);
+-   DLT_REGISTER_CONTEXT(persComLldbDLTCtx, dltContextID, "PersCommonLLDB");
+-   //DLT_SET_APPLICATION_LL_TS_LIMIT(DLT_LOG_DEBUG, DLT_TRACE_STATUS_OFF);
+-   DLT_LOG(persComLldbDLTCtx, DLT_LOG_DEBUG, DLT_STRING(LT_HDR); DLT_STRING(__FUNCTION__); DLT_STRING(":"); DLT_STRING("register context PersCommonLLDB ContextID="); DLT_STRING(dltContextID));
+-}
+-
+-__attribute__((destructor))
+-static void pco_library_destroy()
+-{
+-   DLT_UNREGISTER_CONTEXT(persComLldbDLTCtx);
+-}
+-
+-
+ /* access to resources shared by the threads within a process */
+ static void lldb_handles_InitHandle(lldb_handler_s* psHandle_inout, pers_lldb_purpose_e ePurpose, str_t const* dbPathname);
+ static bool_t lldb_handles_DeinitHandle(sint_t dbHandler);
+@@ -185,6 +163,21 @@ sint_t pers_lldb_open(str_t const * dbPathname, pers_lldb_purpose_e ePurpose, bo
+    int openMode = SQLITE_OPEN_READWRITE;   // default mode
+    sint_t rval = PERS_COM_SUCCESS;
+    lldb_handler_s* pLldbHandler = NIL;
++   static bool_t bFirstCall = true ;
++
++   if (bFirstCall)
++   {
++      pid_t pid = getpid();
++      str_t dltContextID[16]; /* should be at most 4 characters string, but colissions occure */
++
++      bFirstCall = false;
++
++      /* init DLT */
++      (void) snprintf(dltContextID, sizeof(dltContextID), "Pers_%04d", pid);
++      DLT_REGISTER_CONTEXT(persComLldbDLTCtx, dltContextID, "PersCommonLLDB");
++      //DLT_SET_APPLICATION_LL_TS_LIMIT(DLT_LOG_DEBUG, DLT_TRACE_STATUS_OFF);
++      DLT_LOG(persComLldbDLTCtx, DLT_LOG_DEBUG, DLT_STRING(LT_HDR); DLT_STRING(__FUNCTION__); DLT_STRING(":"); DLT_STRING("register context PersCommonLLDB ContextID="); DLT_STRING(dltContextID));
++   }
+ 
+ #ifdef DB_DEBUG
+    DLT_LOG(persComLldbDLTCtx, DLT_LOG_INFO, DLT_STRING("pers_lldb_open -> dbPathname:" ), DLT_STRING(dbPathname), DLT_STRING("Mode:"), DLT_INT(bForceCreationIfNotPresent));
+-- 
+2.22.0
+
