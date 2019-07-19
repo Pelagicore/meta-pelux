@@ -1,7 +1,8 @@
-From 1aa8f8af363518578437ac6921754e1e175b6943 Mon Sep 17 00:00:00 2001
+From 5c70ff0bbeed422f44fb977ba5e18b12605e986d Mon Sep 17 00:00:00 2001
 From: Martin Ejdestig <mejdestig@luxoft.com>
 Date: Tue, 25 Jun 2019 15:06:06 +0200
-Subject: [PATCH] udev-extraconf: allow labels and UUID:s in mount blacklists
+Subject: [PATCH 1/2] udev-extraconf: allow labels and UUID:s in mount
+ blacklists
 
 Needed for systems were device nodes are not known when an image is built
 but there are partitions that should not be automatically mounted.
@@ -47,5 +48,5 @@ index 3ee67b1318..f655c7003d 100644
  
  automount_systemd() {
 -- 
-2.22.0
+2.17.1
 
