@@ -2,6 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI +=  "\
     file://0001-udev-extraconf-allow-labels-and-UUID-s-in-mount-blac.patch;striplevel=5 \
+    file://0002-udev-extraconf-do-not-try-to-mount-swap-partitions.patch;striplevel=5 \
     file://pelux-roots.blacklist \
 "
 
