@@ -1,0 +1,34 @@
+From 95b5e3220516c50ba291f0e931039a9f49e3a214 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Mon, 22 Jul 2019 09:17:38 +0200
+Subject: [PATCH 2/2] Install D-Bus policy file in /usr/share/dbus-1/system.d
+
+Instead of /etc/dbus-1/system.d. Package supplied policy configuration
+in /etc/dbus-1/system.d is officially deprecated in D-Bus since 1.13.10 and
+is reserved for system administrators wanting to override default behavior.
+/usr/share/dbus-1/system.d has been preferred since D-Bus 1.10.0 (released
+~4 years ago). See the following commit in D-Bus for deprecation notice:
+
+https://gitlab.freedesktop.org/dbus/dbus/commit/dee0f551112349da4aa3f913f92f2c7c8f48f1f0
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 1bf051c..29d8f67 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -247,7 +247,7 @@ dnl *************************************
+ AC_ARG_WITH([dbuspolicydir],
+         AS_HELP_STRING([--with-dbuspolicydirdir=DIR], [Directory for D-Bus system policy files]),
+         [],
+-        [with_dbuspolicydir=$(pkg-config --silence-errors --variable=sysconfdir dbus-1)/dbus-1/system.d])
++        [with_dbuspolicydir=$(pkg-config --silence-errors --variable=datadir dbus-1)/dbus-1/system.d])
+ AC_SUBST([dbuspolicydir], [$with_dbuspolicydir])
+ 
+ # Derive path for storing 'dbus' interface files (e. g. /usr/share/dbus-1/interfaces)
+-- 
+2.22.0
+

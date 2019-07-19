@@ -1,0 +1,76 @@
+From 5a17af16a01a6cbe2cd9e027e75783593a4c5316 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Thu, 18 Jul 2019 10:19:08 +0200
+Subject: [PATCH] Revert "dbus_config: Remove dbus configuration file"
+
+This reverts commit 103be9f0bb77df0b139541ab366ff98a4fe4e408.
+
+No D-Bus policy file is installed which causes persistence-administrator
+to fail during startup since it ends up calling a persitence-client-object
+function that wants to own the name org.genivi.persistence.admin. Owning
+names is denied by default on the system bus.
+
+Since it is persistence-common-object that takes the name
+org.genivi.persistence.admin in src/pers_ipc_dbus.c:persIpcPASLoopThread(),
+the configuration probably belongs in this repository.
+
+It looks like persistence-client-library has never installed
+org.genivi.persistence.admin.conf itself in its build system. It was done
+for a while in meta-ivi which must have been the source of the conflict
+mentioned in the reverted commit. Installed in
+GENIVI/meta-ivi@7318681d851e3e3ee22a but later removed in
+GENIVI/meta-ivi@9d5a45e473fbb3a29f5e with the comment "it should be done
+by PCO".
+
+The reverted commit was sent in pull request #3 with no reasoning as to why
+it should be added by persistent-client-library instead of
+persistence-common-object. Later pull request #5 first adds it but then
+removes it again in a later commit. Unsure why. Reasoning in comment about
+the missing D-Bus config file seemed correct.
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ dbus_config/org.genivi.persistence.admin.conf | 16 ++++++++++++++++
+ src/Makefile.am                               |  2 ++
+ 2 files changed, 18 insertions(+)
+ create mode 100644 dbus_config/org.genivi.persistence.admin.conf
+
+diff --git a/dbus_config/org.genivi.persistence.admin.conf b/dbus_config/org.genivi.persistence.admin.conf
+new file mode 100644
+index 0000000..fac05f9
+--- /dev/null
++++ b/dbus_config/org.genivi.persistence.admin.conf
+@@ -0,0 +1,16 @@
++<!DOCTYPE busconfig PUBLIC
++ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
++ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
++<busconfig>
++
++	<!-- Only root can own the service -->
++	<policy user="root">
++		<allow own="org.genivi.persistence.admin"/>
++		<allow send_destination="org.genivi.persistence.admin"/>
++		<allow send_interface="org.genivi.persistence.admin"/>
++	</policy>
++	<policy context="default">
++    	<allow send_destination="org.genivi.persistence.admin"/>
++    	<allow send_interface="org.genivi.persistence.admin"/>
++  </policy>
++</busconfig>
+\ No newline at end of file
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 2294605..15231bc 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -114,6 +114,8 @@ libpers_common_la_LIBADD += \
+                              $(RAWDB_LIBS)
+ endif
+ 
++dbuspolicy_DATA = ../dbus_config/org.genivi.persistence.admin.conf
++
+ # Export interface description of org.genivi.persistence.admin DBus interface
+ dbusinterfaces_DATA = ../dbus_specifications/org.genivi.persistence.admin.xml
+ 
+-- 
+2.22.0
+
