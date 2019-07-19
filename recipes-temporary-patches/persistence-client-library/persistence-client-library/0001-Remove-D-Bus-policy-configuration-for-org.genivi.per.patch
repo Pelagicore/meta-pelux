@@ -1,0 +1,43 @@
+From ca2d3051e3d1ec8fb9abcec2c8e4804136f45862 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Thu, 18 Jul 2019 10:57:47 +0200
+Subject: [PATCH] Remove D-Bus policy configuration for
+ org.genivi.persistence.admin
+
+The policy file is never installed by Makefile and it is
+persistence-common-object that takes the name so policy should probably be
+in that repository. Remove from pcl for less confusion.
+
+See GENIVI/persistence-common-object#8 for more details.
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ config/org.genivi.persistence.admin.conf | 16 ----------------
+ 1 file changed, 16 deletions(-)
+ delete mode 100644 config/org.genivi.persistence.admin.conf
+
+diff --git a/config/org.genivi.persistence.admin.conf b/config/org.genivi.persistence.admin.conf
+deleted file mode 100644
+index 4058199..0000000
+--- a/config/org.genivi.persistence.admin.conf
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<!DOCTYPE busconfig PUBLIC
+- "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+- "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+-<busconfig>
+-
+-	<!-- Only root can own the service -->
+-	<policy user="root">
+-		<allow own="org.genivi.persistence.admin"/>
+-		<allow send_destination="org.genivi.persistence.admin"/>
+-		<allow send_interface="org.genivi.persistence.admin"/>
+-	</policy>
+-	<policy context="default">
+-    	<allow send_destination="org.genivi.persistence.admin"/>
+-    	<allow send_interface="org.genivi.persistence.admin"/>
+-  </policy>
+-</busconfig>
+-- 
+2.22.0
+

@@ -1,0 +1,32 @@
+From 07e19a31d92f716330e0739824f13b62096877d7 Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <mejdestig@luxoft.com>
+Date: Fri, 19 Jul 2019 11:04:35 +0200
+Subject: [PATCH] Replace unknown oip-cpi-mandatory.target in systemd service
+ file
+
+With a well known systemd target. oip-cpi-mandatory.target is Continental
+specific?
+
+Do not know for sure that multi-user.target is the best one. Perhaps the
+administrator service should be changed to be D-Bus activated in the future
+since it is not required to be running all the time (if I have understood
+things correctly).
+
+Signed-off-by: Martin Ejdestig <mejdestig@luxoft.com>
+---
+ Administrator/config/pas-daemon.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Administrator/config/pas-daemon.service.in b/Administrator/config/pas-daemon.service.in
+index 6246ae0..9d42651 100644
+--- a/Administrator/config/pas-daemon.service.in
++++ b/Administrator/config/pas-daemon.service.in
+@@ -16,4 +16,4 @@ StartLimitBurst=3
+ StartLimitAction=reboot
+ 
+ [Install]
+-WantedBy=oip-cpi-mandatory.target
++WantedBy=multi-user.target
+-- 
+2.22.0
+
