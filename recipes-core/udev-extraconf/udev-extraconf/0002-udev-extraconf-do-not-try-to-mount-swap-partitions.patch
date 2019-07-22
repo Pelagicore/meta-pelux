@@ -1,4 +1,4 @@
-From 6939f7af8a369dbd617c2551421588029215ce3a Mon Sep 17 00:00:00 2001
+From ca322c99a263e8dfb8ba56d2a68f2e97898476ed Mon Sep 17 00:00:00 2001
 From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 Date: Fri, 19 Jul 2019 13:42:08 +0200
 Subject: [PATCH 2/2] udev-extraconf: do not try to mount swap partitions
@@ -16,15 +16,15 @@ Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/meta/recipes-core/udev/udev-extraconf/mount.sh b/meta/recipes-core/udev/udev-extraconf/mount.sh
-index f655c7003d..3f3bd9ab1b 100644
+index 3ee67b1318..8c39f89dbe 100644
 --- a/meta/recipes-core/udev/udev-extraconf/mount.sh
 +++ b/meta/recipes-core/udev/udev-extraconf/mount.sh
-@@ -62,6 +62,8 @@ automount_systemd() {
+@@ -57,6 +57,8 @@ automount_systemd() {
      vfat|fat)
          MOUNT="$MOUNT -o umask=007,gid=`awk -F':' '/^disk/{print $3}' /etc/group`"
          ;;
 +    swap)
-+        ;;
++        return ;;
      # TODO
      *)
          ;;
