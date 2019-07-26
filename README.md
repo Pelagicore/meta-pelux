@@ -43,7 +43,7 @@ one-year-old releases in this fashion.
 
 License and Copyright
 ---------------------
-Copyright &copy; 2016-2017 Pelagicore AB
+Copyright &copy; 2016-2017 Pelagicore AB  
 Copyright &copy; 2017-2019 Luxoft Sweden AB
 
 All metadata is MIT licensed unless otherwise stated. Source code included in
