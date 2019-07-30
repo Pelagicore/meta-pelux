@@ -9,7 +9,6 @@ IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
 PREFERRED_PROVIDER_iasl-native = "iasl-native"
 
 WKS_FILE = "mkefidisk-multiboot.wks"
-WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
 
 IMAGE_INSTALL_append = " grub-efi"
 
