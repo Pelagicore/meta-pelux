@@ -12,6 +12,4 @@ do_install_append() {
 FILES_${PN} += "/etc/resolv.conf"
 FILES_${PN} += "${sysconfdir}/systemd/system/getty.target.wants"
 
-PACKAGECONFIG += " \
-    kmod \
-"
+PACKAGECONFIG_append = " kmod "
