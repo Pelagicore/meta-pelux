@@ -32,6 +32,7 @@ IMAGE_INSTALL_append = "\
     avs-device-sdk     \
     can-utils \
     connectivity-manager \
+    iproute2 \
     libsocketcan \
     mopidy \
     user-identification-manager \
