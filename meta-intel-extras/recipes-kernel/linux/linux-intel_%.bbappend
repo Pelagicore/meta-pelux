@@ -5,11 +5,13 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-KERNEL_FEATURES_append = " features/mmc/mmc-realtek.scc"
+KERNEL_FEATURES_append = " \
+    features/can/can.scc \
+    features/mmc/mmc-realtek.scc \
+"
 
 # Additional config fragments
 SRC_URI += " \
-    file://enable-can.cfg \
     file://enable-veth.cfg \
     file://enable-hid-multitouch.cfg \
 "
