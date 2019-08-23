@@ -1,5 +1,6 @@
 #
 #   Copyright (C) 2017 Pelagicore AB
+#   Copyright (C) 2019 Luxoft Sweden AB
 #   SPDX-License-Identifier: MIT
 #
 
@@ -11,6 +12,6 @@ SRC_URI += " \
     "
 
 do_install_append(){
-    install ${WORKDIR}/io.qt.ApplicationManager.Application.json ${D}/etc/softwarecontainer/service-manifest.d/
-    install ${WORKDIR}/softwarecontainer-agent.service ${D}/lib/systemd/system/
+    install ${WORKDIR}/io.qt.ApplicationManager.Application.json ${D}${sysconfdir}/softwarecontainer/service-manifest.d/
+    install -m 0644 ${WORKDIR}/softwarecontainer-agent.service ${D}${systemd_unitdir}/system/
 }
