@@ -12,4 +12,5 @@ SRC_URI += " \
     file://enable-can.cfg \
     file://enable-veth.cfg \
     file://enable-hid-multitouch.cfg \
+    file://disable-brtfs.cfg \
 "
