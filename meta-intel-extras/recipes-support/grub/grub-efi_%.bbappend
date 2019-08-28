@@ -25,3 +25,5 @@ FILES_${PN} += " \
 "
 
 SYSTEMD_SERVICE_${PN} = "grubenv-copy.service"
+
+GRUB_BUILDIN = "boot linux fat part_gpt normal efi_gop loadenv"
