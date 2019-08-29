@@ -12,8 +12,7 @@ SRC_URI += "\
     file://mopidy.service \
     "
 
-PYPI_PACKAGE = "Mopidy"
-inherit pypi setuptools systemd
+inherit pypi setuptools systemd useradd
 
 do_install_append() {
     install -d ${D}/${ROOT_HOME}/Music
@@ -43,5 +42,14 @@ FILES_${PN} += " \
     ${ROOT_HOME}/Music \
     ${systemd_system_unitdir}/mopidy.service \
     "
+
+PYPI_PACKAGE = "Mopidy"
+
+# Create user and group
+USER = "mopidy"
+GROUP = "mopidy"
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = "--no-create-home --gid ${GROUP} --shell /bin/false ${USER}"
+GROUPADD_PARAM_${PN} = "${GROUP}"
 
 SYSTEMD_SERVICE_${PN} = "mopidy.service"

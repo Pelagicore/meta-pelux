@@ -1,5 +1,7 @@
 [Unit]
 Description=Mopidy media service
+User=mopidy
+Group=mopidy
  
 [Install]
 WantedBy=multi-user.target
