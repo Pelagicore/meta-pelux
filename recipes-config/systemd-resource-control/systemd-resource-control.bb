@@ -11,6 +11,7 @@ SRC_URI += " \
     file://service.connectivity-manager.conf \
     file://service.connman.conf \
     file://service.neptune.conf \
+    file://service.wpa_supplicant.conf \
 "
 
 S = "${WORKDIR}"
@@ -28,10 +29,12 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system/connectivity-manager.service.d/
     install -d ${D}${systemd_unitdir}/system/connman.service.d/
     install -d ${D}${systemd_unitdir}/system/neptune.service.d/
+    install -d ${D}${systemd_unitdir}/system/wpa_supplicant.service.d/
 
     install -m 0644 ${WORKDIR}/service.connectivity-manager.conf ${D}${systemd_unitdir}/system/connectivity-manager.service.d/
     install -m 0644 ${WORKDIR}/service.connman.conf ${D}${systemd_unitdir}/system/connman.service.d/
     install -m 0644 ${WORKDIR}/service.neptune.conf ${D}${systemd_unitdir}/system/neptune.service.d/
+    install -m 0644 ${WORKDIR}/service.wpa_supplicant.conf ${D}${systemd_unitdir}/system/wpa_supplicant.service.d/
 }
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/services/:"
@@ -42,4 +45,5 @@ FILES_${PN} += " \
     ${systemd_unitdir}/system/connectivity-manager.service.d/ \
     ${systemd_unitdir}/system/connman.service.d/ \
     ${systemd_unitdir}/system/neptune.service.d/ \
+    ${systemd_unitdir}/system/wpa_supplicant.service.d/ \
 "
