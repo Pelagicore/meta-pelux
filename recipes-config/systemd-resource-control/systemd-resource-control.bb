@@ -8,6 +8,7 @@ SRC_URI += " \
     file://LICENSE \
     file://connectivity.slice \
     file://ui.slice \
+    file://service.bluetooth.conf \
     file://service.connectivity-manager.conf \
     file://service.connman.conf \
     file://service.neptune.conf \
@@ -26,11 +27,13 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/ui.slice ${D}${systemd_unitdir}/system/
 
     # Install overrides for services
+    install -d ${D}${systemd_unitdir}/system/bluetooth.service.d/
     install -d ${D}${systemd_unitdir}/system/connectivity-manager.service.d/
     install -d ${D}${systemd_unitdir}/system/connman.service.d/
     install -d ${D}${systemd_unitdir}/system/neptune.service.d/
     install -d ${D}${systemd_unitdir}/system/wpa_supplicant.service.d/
 
+    install -m 0644 ${WORKDIR}/service.bluetooth.conf ${D}${systemd_unitdir}/system/bluetooth.service.d/
     install -m 0644 ${WORKDIR}/service.connectivity-manager.conf ${D}${systemd_unitdir}/system/connectivity-manager.service.d/
     install -m 0644 ${WORKDIR}/service.connman.conf ${D}${systemd_unitdir}/system/connman.service.d/
     install -m 0644 ${WORKDIR}/service.neptune.conf ${D}${systemd_unitdir}/system/neptune.service.d/
@@ -42,6 +45,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/slices/:"
 FILESEXTRAPATHS_prepend := "${THISDIR}/systemd-resource-control/:"
 FILES_${PN} += " \
     ${systemd_unitdir}/system/ \
+    ${systemd_unitdir}/system/bluetooth.service.d/ \
     ${systemd_unitdir}/system/connectivity-manager.service.d/ \
     ${systemd_unitdir}/system/connman.service.d/ \
     ${systemd_unitdir}/system/neptune.service.d/ \
