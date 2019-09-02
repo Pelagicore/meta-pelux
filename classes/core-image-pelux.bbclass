@@ -35,6 +35,7 @@ IMAGE_INSTALL_append = "\
     iproute2 \
     libsocketcan \
     mopidy \
+    systemd-resource-control \
     user-identification-manager \
 "
 
