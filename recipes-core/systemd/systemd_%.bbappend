@@ -20,6 +20,10 @@ FILES_${PN} += " \
     ${libdir}/sysctl.d/99-printk.conf \
 "
 
+PACKAGECONFIG_remove = " \
+    networkd \
+"
+
 do_install_append() {
     install -d ${D}${libdir}/sysctl.d
     install -m 0644 ${WORKDIR}/99-printk.conf ${D}${libdir}/sysctl.d/
