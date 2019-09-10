@@ -1,0 +1,1 @@
+PACAGECONFIG_append = " eglfs "
