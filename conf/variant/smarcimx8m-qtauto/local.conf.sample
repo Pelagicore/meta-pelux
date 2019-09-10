@@ -1,0 +1,22 @@
+require conf/variant/common/local.conf
+
+MACHINE = "smarcimx8m2g"
+
+PREFERRED_PROVIDER_iasl-native = "iasl-native"
+PREFERRED_PROVIDER_libubootenv = "u-boot-fw-utils"
+PREFERRED_PROVIDER_libubootenv-cross = "u-boot-fw-utils"
+PREFERRED_PROVIDER_u-boot-fslc-fw-utils = "u-boot-fw-utils"
+PREFERRED_PROVIDER_u-boot-fslc-fw-utils-cross = "u-boot-fw-utils"
+PREFERRED_PROVIDER_u-boot-fw-utils = "u-boot-fw-utils"
+PREFERRED_PROVIDER_u-boot-qoriq-fw-utils = "u-boot-fw-utils"
+PREFERRED_PROVIDER_u-boot-qoriq-fw-utils-cross = "u-boot-fw-utils"
+
+LICENSE_FLAGS_WHITELIST = "commercial_faad2"
+
+# In order to accept Freescale EULA, uncomment the following line:
+#ACCEPT_FSL_EULA = "1"
+
+# networkmanager conflicts with connman
+MACHINE_EXTRA_RDEPENDS_remove = "networkmanager"
+
+BBMASK .= "|./meta-fsl-bsp-release/imx/meta-bsp/recipes-connectivity/connman/connman_%.bbappend"
