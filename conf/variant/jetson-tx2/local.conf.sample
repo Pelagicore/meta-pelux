@@ -1,0 +1,3 @@
+require conf/variant/common/local.conf
+
+MACHINE = "jetson-tx2"
