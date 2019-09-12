@@ -20,6 +20,11 @@ IMAGE_INSTALL_remove_qemux86-64 = "\
     swupdate \
 "
 
+# swupdate does not compile on smarcimx8m2g
+IMAGE_INSTALL_remove_smarcimx8m2g = "\
+    swupdate \
+"
+
 # GENIVI components
 IMAGE_INSTALL_append = "\
     dlt-daemon         \
