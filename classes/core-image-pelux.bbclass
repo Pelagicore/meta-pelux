@@ -25,6 +25,11 @@ IMAGE_INSTALL_remove_smarcimx8m2g = "\
     swupdate \
 "
 
+# swupdate does not compile on jetson-tx2
+IMAGE_INSTALL_remove_jetson-tx2 = "\
+    swupdate \
+"
+
 # GENIVI components
 IMAGE_INSTALL_append = "\
     dlt-daemon         \
