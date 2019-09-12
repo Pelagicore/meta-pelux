@@ -25,9 +25,10 @@ IMAGE_INSTALL_remove_smarcimx8m2g = "\
     swupdate \
 "
 
-# swupdate does not compile on jetson-tx2
+# swupdate and avs-device-sdk do not compile on jetson-tx2
 IMAGE_INSTALL_remove_jetson-tx2 = "\
     swupdate \
+    avs-device-sdk \
 "
 
 # GENIVI components
