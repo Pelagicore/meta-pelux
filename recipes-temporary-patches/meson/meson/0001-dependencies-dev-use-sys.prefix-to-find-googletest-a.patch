@@ -1,0 +1,47 @@
+From f27e7059714b9141e0580537fdac260f9b7dff0f Mon Sep 17 00:00:00 2001
+From: Martin Ejdestig <marejde@gmail.com>
+Date: Thu, 12 Sep 2019 18:46:53 +0200
+Subject: [PATCH] dependencies/dev: use sys.prefix to find googletest and
+ googlemock source
+
+Can otherwise be problematic in cross compilation build environments. See
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=13508 for Yocto bug.
+---
+ mesonbuild/dependencies/dev.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/mesonbuild/dependencies/dev.py b/mesonbuild/dependencies/dev.py
+index 223e6dc7..6a76c029 100644
+--- a/mesonbuild/dependencies/dev.py
++++ b/mesonbuild/dependencies/dev.py
+@@ -19,6 +19,7 @@ import functools
+ import glob
+ import os
+ import re
++import sys
+ 
+ from .. import mesonlib, mlog
+ from ..mesonlib import version_compare, stringlistify, extract_as_list, MachineChoice
+@@ -47,7 +48,8 @@ class GTestDependency(ExternalDependency):
+     def __init__(self, environment, kwargs):
+         super().__init__('gtest', environment, 'cpp', kwargs)
+         self.main = kwargs.get('main', False)
+-        self.src_dirs = ['/usr/src/gtest/src', '/usr/src/googletest/googletest/src']
++        sub_src_dirs = ['src/gtest/src', 'src/googletest/googletest/src']
++        self.src_dirs = [os.path.join(sys.prefix, d) for d in sub_src_dirs]
+         self.detect()
+         self._add_sub_dependency(ThreadDependency, environment, kwargs)
+ 
+@@ -149,7 +151,8 @@ class GMockDependency(ExternalDependency):
+             self.prebuilt = True
+             return
+ 
+-        for d in ['/usr/src/googletest/googlemock/src', '/usr/src/gmock/src', '/usr/src/gmock']:
++        sub_src_dirs = ['src/googletest/googlemock/src', 'src/gmock/src', 'src/gmock']
++        for d in [os.path.join(sys.prefix, d) for d in sub_src_dirs]:
+             if os.path.exists(d):
+                 self.is_found = True
+                 # Yes, we need both because there are multiple
+-- 
+2.23.0
+
