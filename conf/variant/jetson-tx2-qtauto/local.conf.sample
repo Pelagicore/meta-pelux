@@ -1,0 +1,5 @@
+require conf/variant/common/local.conf
+
+MACHINE = "jetson-tx2"
+
+LICENSE_FLAGS_WHITELIST = "commercial_faad2"
