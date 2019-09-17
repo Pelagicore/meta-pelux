@@ -3,3 +3,5 @@ require conf/variant/common/local.conf
 MACHINE = "jetson-tx2"
 
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
+
+BBMASK .= "./meta-tegra/recipes-graphics/vulkan/vulkan_1.1.73.0.bbappend"
