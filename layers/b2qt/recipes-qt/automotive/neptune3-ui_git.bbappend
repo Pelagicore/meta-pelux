@@ -6,8 +6,9 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-RDEPENDS_${PN}_append = "\
-    dbus-session \
+SRC_URI += "\
+    file://pelux.conf \
+    file://neptune \
 "
 
 HAS_CONTAINMENT = "${@bb.utils.contains('DISTRO_FEATURES', 'process-containment', '-c /opt/am/sc-config.yaml', '', d)}"
@@ -21,8 +22,16 @@ do_install_prepend() {
     cd ${WORKDIR}/git/
     git lfs pull
     cd -
+}
 
-    sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}${FORCE_SINGLE_PROCESS}|" ${WORKDIR}/neptune.service
+do_install_append() {
+    install -d ${D}${sysconfdir}/default/
+    install -d ${D}${systemd_system_unitdir}/neptune.service.d/
+
+    install -m 0644 ${WORKDIR}/neptune ${D}${sysconfdir}/default/
+    install -m 0644 ${WORKDIR}/pelux.conf ${D}${systemd_system_unitdir}/neptune.service.d/
+
+    sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}${FORCE_SINGLE_PROCESS}|" ${WORKDIR}/pelux.conf
 }
 
 #
@@ -37,6 +46,11 @@ do_install_prepend_rpi() {
 }
 
 RDEPENDS_${PN} += " qtquickcontrols-qmlplugins "
+
+FILES_${PN} += "\
+    ${sysconfdir}/default/ \
+    ${systemd_unitdir}/system/neptune.service.d/pelux.conf \
+"
 
 FILES_${PN}-tests += "${datadir}/qt5/tests/neptune-qmltestsrunner/neptune-qmltestsrunner"
 PACKAGES =+ "${PN}-tests"
