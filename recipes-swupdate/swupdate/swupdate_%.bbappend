@@ -19,3 +19,5 @@ do_install_append() {
 }
 
 SYSTEMD_SERVICE_${PN}_remove = "swupdate-usb@.service swupdate-progress.service"
+
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
