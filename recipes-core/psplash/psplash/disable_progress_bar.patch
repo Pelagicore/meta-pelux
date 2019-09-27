@@ -1,0 +1,15 @@
+diff --git a/psplash-bar-img.h b/psplash-bar-img.h
+index c1c7626..c672894 100644
+--- a/psplash-bar-img.h
++++ b/psplash-bar-img.h
+@@ -1,8 +1,8 @@
+ /* GdkPixbuf RGBA C-Source image dump 1-byte-run-length-encoded */
+ 
+ #define BAR_IMG_ROWSTRIDE (920)
+-#define BAR_IMG_WIDTH (230)
+-#define BAR_IMG_HEIGHT (28)
++#define BAR_IMG_WIDTH (0)
++#define BAR_IMG_HEIGHT (0)
+ #define BAR_IMG_BYTES_PER_PIXEL (4) /* 3:RGB, 4:RGBA */
+ #define BAR_IMG_RLE_PIXEL_DATA ((uint8*) \
+   "\203\354\354\341\377\4\326\326\315\377\236\236\233\377\200\200\201\377" \
