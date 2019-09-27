@@ -1,9 +1,15 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += " \
+    file://change_background_color.patch \
+    file://disable_progress_bar.patch \
     file://psplash-start.service \
     file://psplash-stop.service \
 "
+
+SPLASH_IMAGES_append = " file://pelux_logo-img.h;outsuffix=pelux"
+
+ALTERNATIVE_PRIORITY_psplash-pelux[psplash] = "900"
 
 inherit systemd
 
