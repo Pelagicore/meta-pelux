@@ -9,7 +9,7 @@ DESCRIPTION = "Reference PELUX image with QtAuto frontend"
 inherit core-image-pelux-qtauto
 inherit populate_sdk_qt5
 
-IMAGE_FEATURES += "ssh-server-openssh"
+IMAGE_FEATURES += "ssh-server-openssh splash"
 
 # This image uses neptune as the reference UI, which is one of the addons in Qt Auto packagegroup
 IMAGE_INSTALL_append = "\
