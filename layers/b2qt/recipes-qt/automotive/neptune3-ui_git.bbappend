@@ -39,9 +39,9 @@ do_install_append() {
 # driver when starting appman with neptune.
 #
 do_install_prepend_rpi() {
-    ENV_LINE="Environment=QT_WAYLAND_HARDWARE_INTEGRATION=brcm"
-    if ! grep -q "$ENV_LINE" "${WORKDIR}/neptune.service"; then
-        sed -i -e "/^\[Install\]$/i $ENV_LINE" ${WORKDIR}/neptune.service
+    ENV_LINE="QT_WAYLAND_HARDWARE_INTEGRATION=brcm"
+    if ! grep -q "$ENV_LINE" "${WORKDIR}/neptune"; then
+        sed -e "\$a$ENV_LINE" ${WORKDIR}/neptune
     fi
 }
 
