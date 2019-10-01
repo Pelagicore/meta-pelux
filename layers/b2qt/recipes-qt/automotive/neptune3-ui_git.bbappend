@@ -29,9 +29,9 @@ do_install_append() {
     install -d ${D}${systemd_system_unitdir}/neptune.service.d/
 
     install -m 0644 ${WORKDIR}/neptune ${D}${sysconfdir}/default/
-    install -m 0644 ${WORKDIR}/pelux.conf ${D}${systemd_system_unitdir}/neptune.service.d/
 
     sed -i -e "s|\$EXTRA_ARGUMENTS|${HAS_CONTAINMENT}${FORCE_SINGLE_PROCESS}|" ${WORKDIR}/pelux.conf
+    install -m 0644 ${WORKDIR}/pelux.conf ${D}${systemd_system_unitdir}/neptune.service.d/
 }
 
 #
