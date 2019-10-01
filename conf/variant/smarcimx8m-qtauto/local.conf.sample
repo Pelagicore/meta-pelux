@@ -10,4 +10,5 @@ LICENSE_FLAGS_WHITELIST = "commercial_faad2"
 # networkmanager conflicts with connman
 MACHINE_EXTRA_RDEPENDS_remove = "networkmanager"
 
-BBMASK .= "|./meta-fsl-bsp-release/imx/meta-bsp/recipes-connectivity/connman/connman_%.bbappend"
+BBMASK = "meta-fsl-bsp-release/imx/meta-bsp/recipes-connectivity/connman/"
+BBMASK += "/meta-smarcimx8m/recipes-core/psplash/"
