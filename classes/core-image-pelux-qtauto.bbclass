@@ -22,5 +22,9 @@ IMAGE_INSTALL += " \
 	${@bb.utils.contains("BBFILE_COLLECTIONS", "b2qt", "${QTAUTO_COMPONENTS}", "", d)} \
 "
 
+IMAGE_INSTALL_append_jetson-tx2 = " \
+    egl-wayland \
+"
+
 TOOLCHAIN_HOST_TASK += " nativesdk-packagegroup-b2qt-automotive-qt5-toolchain-host "
 TOOLCHAIN_TARGET_TASK += " packagegroup-b2qt-automotive-qt5-toolchain-target qtapplicationmanager-staticdev"
