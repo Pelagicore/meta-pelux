@@ -6,8 +6,5 @@ require conf/variant/common/bblayers.conf
 require conf/variant/common/bblayers-qtauto.conf
 
 BBLAYERS += "\
-    ${BSPDIR}/sources/meta-pelux/meta-intel-extras  \
     ${BSPDIR}/sources/meta-intel                    \
 "
-
-
