@@ -5,8 +5,5 @@ BBPATH := "${TOPDIR}:${BSPDIR}/sources/meta-pelux"
 require conf/variant/common/bblayers.conf
 
 BBLAYERS += "\
-    ${BSPDIR}/sources/meta-pelux/meta-intel-extras  \
     ${BSPDIR}/sources/meta-intel                    \
 "
-
-
