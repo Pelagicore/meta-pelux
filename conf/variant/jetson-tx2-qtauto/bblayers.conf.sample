@@ -7,6 +7,5 @@ require conf/variant/common/bblayers-qtauto.conf
 
 BBLAYERS += "\
     ${BSPDIR}/sources/meta-tegra \
-    ${BSPDIR}/sources/meta-pelux/meta-tegra-extras \
     ${BSPDIR}/sources/meta-boot2qt/meta-tegra-extras \
 "
