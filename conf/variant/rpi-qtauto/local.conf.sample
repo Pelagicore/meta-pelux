@@ -2,6 +2,8 @@ require conf/variant/common/local.conf
 
 WKS_FILE = "raspberrypi.wks"
 
+WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
+
 IMAGE_FSTYPES_append = " wic wic.bmap wic.bz2"
 
 MACHINE = "raspberrypi3"
