@@ -9,5 +9,4 @@ BBLAYERS += " \
     ${BSPDIR}/sources/meta-freescale \
     ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \
     ${BSPDIR}/sources/meta-smarcimx8m \
-    ${BSPDIR}/sources/meta-pelux/meta-smarcimx8m-extras \
 "
