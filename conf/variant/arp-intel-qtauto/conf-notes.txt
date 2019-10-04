@@ -1,4 +1,4 @@
-Available PELUX images for arp-qtauto:
+Available PELUX images for arp-intel-qtauto:
 * core-image-pelux-minimal
 * core-image-pelux-minimal-dev
 * core-image-pelux-minimal-update
