@@ -1,5 +1,4 @@
 require conf/variant/common/local.conf
-require conf/machine/intel-corei7-64.conf
 
 MACHINE = "intel-corei7-64"
 
