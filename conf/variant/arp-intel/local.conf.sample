@@ -1,10 +1,11 @@
 require conf/variant/common/local.conf
+require conf/machine/intel-corei7-64.conf
 
-MACHINE = "arp"
-
-IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
+MACHINE = "intel-corei7-64"
 
 EFI_PROVIDER = "grub-efi"
+
+IMAGE_FSTYPES += "wic wic.bmap wic.bz2"
 
 PREFERRED_PROVIDER_iasl-native = "iasl-native"
 

@@ -1,6 +1,7 @@
 require conf/variant/common/local.conf
+require conf/machine/intel-corei7-64.conf
 
-MACHINE = "arp"
+MACHINE = "intel-corei7-64"
 
 EFI_PROVIDER = "grub-efi"
 
