@@ -50,10 +50,6 @@ IMAGE_INSTALL_append = "\
     user-identification-manager \
 "
 
-IMAGE_INSTALL_append_arp = "\
-    arp-driver \
-"
-
 TOOLCHAIN_HOST_TASK += "\
     nativesdk-cmake \
     nativesdk-gdbus-codegen-glibmm \
