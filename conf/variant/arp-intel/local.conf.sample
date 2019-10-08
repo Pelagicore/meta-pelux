@@ -11,6 +11,9 @@ PREFERRED_PROVIDER_iasl-native = "iasl-native"
 WKS_FILE = "mkefidisk-multiboot.wks"
 WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
 
-IMAGE_INSTALL_append = " grub-efi"
+IMAGE_INSTALL_append = " \
+    grub-efi \
+    arp-driver \
+"
 
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
