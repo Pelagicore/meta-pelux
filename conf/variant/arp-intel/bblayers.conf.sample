@@ -7,5 +7,4 @@ require conf/variant/common/bblayers.conf
 BBLAYERS += "\
     ${BSPDIR}/sources/meta-pelux/meta-arp-extras    \
     ${BSPDIR}/sources/meta-intel                    \
-    ${BSPDIR}/sources/meta-arp                      \
 "
