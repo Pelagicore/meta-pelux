@@ -8,3 +8,7 @@ IMAGE_FSTYPES += "tegraflash"
 LICENSE_FLAGS_WHITELIST = "commercial_faad2"
 
 BBMASK .= "./meta-tegra/recipes-graphics/vulkan/vulkan_1.1.73.0.bbappend"
+
+IMAGE_INSTALL_append = " \
+    kernel-modules \
+"
