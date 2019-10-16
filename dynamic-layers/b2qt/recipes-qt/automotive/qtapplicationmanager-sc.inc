@@ -18,6 +18,13 @@ SRC_URI += "\
     file://sc-config.yaml \
 "
 
+# softwarecontainer is not configured for Jetson TX2 at the moment,
+# so do not run the Calendar and Map apps inside the container
+do_install_prepend_tegra186() {
+    sed -i '/com.pelagicore.calendar/d' ${WORKDIR}/sc-config.yaml
+    sed -i '/com.pelagicore.map/d' ${WORKDIR}/sc-config.yaml
+}
+
 do_install_append_class-target() {
     install -d ${D}${libdir}
     install -m 755 ${B}/examples/applicationmanager/softwarecontainer-plugin/libsoftwarecontainer-plugin.so ${D}${libdir}
