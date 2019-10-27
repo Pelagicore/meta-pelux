@@ -1,1 +1,1 @@
-PACAGECONFIG_append = " eglfs "
+PACKAGECONFIG_append = " eglfs "
