@@ -4,17 +4,17 @@
 #   SPDX-License-Identifier: MIT
 #
 
-RDEPENDS_${PN} += "${PN}-softwarecontainer"
+RDEPENDS_${PN}_append = " ${PN}-softwarecontainer"
 
 # Due to immediate expansion of variables using :=, ${PN} is not yet available
 # in this .inc-file
 FILESEXTRAPATHS_prepend := "${THISDIR}/qtapplicationmanager:"
 
-EXTRA_QMAKEVARS_PRE += "\
+EXTRA_QMAKEVARS_PRE_append = " \
     -config enable-examples \
 "
 
-SRC_URI += "\
+SRC_URI_append = " \
     file://sc-config.yaml \
 "
 
