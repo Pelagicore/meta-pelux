@@ -26,12 +26,13 @@ LCONF_VERSION = "7"
 # Enable bblayers specific for sertain features by uncommenting below
 
 # Qt Auto
-# require conf/variant/common/bblayers-qtauto.conf
+# require conf/sample/features/bblayers-qtauto.conf
+# require conf/sample/features/bblayers-acrn.conf
 
 # Hardware specific BSP layers
 # QEMU does not require any BSP layer
 
-# require conf/variant/common/bblayers-intel.conf
-# require conf/variant/common/bblayers-jetson-tx2.conf
-# require conf/variant/common/bblayers-raspberry-pi.conf
-# require conf/variant/common/bblayers-imx8.conf
+# require conf/sample/machines/bblayers-intel-corei7-64.conf
+# require conf/sample/machines/bblayers-jetson-tx2.conf
+# require conf/sample/machines/bblayers-raspberrypi3.conf
+# require conf/sample/machines/bblayers-smarcimx8m2g.conf
