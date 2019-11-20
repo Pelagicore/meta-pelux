@@ -1,7 +1,0 @@
-Available PELUX images for intel:
-* core-image-pelux-minimal
-* core-image-pelux-minimal-dev
-* core-image-pelux-minimal-update
-* core-image-pelux-minimal-dev-update
-
-Build them by running: bitbake <image>

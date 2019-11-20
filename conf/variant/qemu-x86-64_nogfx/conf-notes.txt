@@ -1,5 +1,0 @@
-Available PELUX images for qemu-x86-64_nogfx:
-* core-image-pelux-minimal
-* core-image-pelux-minimal-dev
-
-Build them by running: bitbake <image>

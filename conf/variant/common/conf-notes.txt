@@ -1,0 +1,12 @@
+To specify which hardware to build for two manual steps are required:
+
+1. Set MACHINE in "conf/local.conf"
+2. Enable BSP and or other features such as QtAuto in "conf/bblayers.conf"
+
+Available PELUX images:
+* core-image-pelux-minimal
+* core-image-pelux-minimal-update
+
+* core-image-pelux-qtauto-neptune     (Requires QtAuto)
+
+Build them by running: bitbake <image>
