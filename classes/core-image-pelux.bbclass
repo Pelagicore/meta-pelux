@@ -6,7 +6,7 @@
 
 inherit core-image
 
-IMAGE_FEATURES += "package-management debug-tweaks"
+IMAGE_FEATURES_append = " package-management debug-tweaks"
 
 IMAGE_INSTALL_append = "\
     ${@bb.utils.contains("COMBINED_FEATURES", "bluetooth", "packagegroup-tools-bluetooth", "", d)} \
@@ -56,7 +56,53 @@ TOOLCHAIN_HOST_TASK += "\
     nativesdk-meson \
 "
 
-IMAGE_ROOTFS_SIZE ?= "1000000"
+#
+# INTEL
+#
 
-# This is needed for SWupdate artifacts
-IMAGE_FSTYPES += "ext3.gz"
+IMAGE_INSTALL_append_intel-corei7-64 = " grub-efi"
+
+#
+# JETSON
+#
+
+IMAGE_INSTALL_append_jetson-tx2 = " kernel-modules"
+
+#
+# QEMU
+#
+
+# Enable testing
+INHERIT_qemux86-64 += " \
+    testimage \
+    testexport \
+"
+
+# All test suites to run
+TEST_SUITES_qemux86-64 = " \
+    date \
+    ping \
+    ssh \
+    scp \
+    df \
+    parselogs \
+    softwarecontainer \
+    node_state_manager \
+    dlt_daemon \
+    systemd.SystemdBasicTests.test_systemd_basic \
+    systemd.SystemdBasicTests.test_systemd_failed \
+    systemd.SystemdBasicTests.test_systemd_list \
+    systemd.SystemdJournalTests.test_systemd_journal \
+    rpm.RpmBasicTest \
+    rpm.RpmInstallRemoveTest.test_rpm_install \
+    rpm.RpmInstallRemoveTest.test_rpm_query_nonroot \
+    rpm.RpmInstallRemoveTest.test_rpm_remove \
+"
+
+#
+# IMX8
+# A less specific machine might be available and preferable
+#
+
+# networkmanager conflicts with connman
+MACHINE_EXTRA_RDEPENDS_remove_smarcimx8m2g = "networkmanager"
