@@ -2,7 +2,7 @@ HOME=/home/%u/
 LC_ALL=en_US
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/dbus_session_socket
 QT_IM_MODULE=qtvirtualkeyboard
-XDG_RUNTIME_DIR=/tmp
+XDG_RUNTIME_DIR=/run/user/0
 QTWEBENGINE_CHROMIUM_FLAGS="--no-sandbox --single-process"
 WAYLAND_DISPLAY="qtam-wayland-0"
 QT_QPA_EGLFS_HIDECURSOR=1
