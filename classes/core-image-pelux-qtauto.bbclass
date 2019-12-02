@@ -12,7 +12,6 @@ inherit core-image-pelux
 QTAUTO_COMPONENTS = " \
     qtapplicationmanager \
     qtivi \
-    qtivi-mopidy-plugin \
     qtvirtualkeyboard \
 "
 
