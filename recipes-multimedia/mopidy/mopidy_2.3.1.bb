@@ -26,6 +26,7 @@ RDEPENDS_${PN} += "\
     gstreamer1.0-plugins-good \
     gstreamer1.0-python \
     python-argparse \
+    python-futures \
     python-pygobject \
     python-pykka \
     python-requests \
