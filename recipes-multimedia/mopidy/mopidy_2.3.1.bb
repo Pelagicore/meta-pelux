@@ -27,6 +27,7 @@ RDEPENDS_${PN} += "\
     gstreamer1.0-python \
     python-argparse \
     python-futures \
+    python-misc \
     python-pygobject \
     python-pykka \
     python-requests \
