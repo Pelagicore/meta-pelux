@@ -1,4 +1,3 @@
-HOME=/home/%u/
 LC_ALL=en_US
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/dbus_session_socket
 QT_IM_MODULE=qtvirtualkeyboard
