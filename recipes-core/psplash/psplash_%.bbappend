@@ -3,6 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += " \
     file://change_background_color.patch \
     file://disable_progress_bar.patch \
+    file://Draw-splash-in-the-middle-of-the-screen.patch \
     file://psplash-start.service \
     file://psplash-stop.service \
 "
