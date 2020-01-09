@@ -1,0 +1,34 @@
+From 13b21244a46dfb5767abaf6e9d6361856cc00008 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Viktor=20Sj=C3=B6lind?= <vsjolind@luxoft.com>
+Date: Thu, 9 Jan 2020 10:38:36 +0100
+Subject: [PATCH] Draw splash in the middle of the screen
+
+By setting the PSPLASH_IMG_SPLIT_NUMERATOR equal to
+PSPLASH_IMG_SPLIT_DENOMINATOR the splash will be drawn in the center of
+the screen.
+
+We want to do this since the splash is supposed to look good in both
+portrait and landscape mode.
+---
+ psplash-config.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/psplash-config.h b/psplash-config.h
+index 82bb76d..0415ab7 100644
+--- a/psplash-config.h
++++ b/psplash-config.h
+@@ -26,9 +26,9 @@
+ #define PSPLASH_IMG_FULLSCREEN 0
+ 
+ /* Position of the image split from top edge, numerator of fraction */
+-#define PSPLASH_IMG_SPLIT_NUMERATOR 5
++#define PSPLASH_IMG_SPLIT_NUMERATOR 1
+ 
+ /* Position of the image split from top edge, denominator of fraction */
+-#define PSPLASH_IMG_SPLIT_DENOMINATOR 6
++#define PSPLASH_IMG_SPLIT_DENOMINATOR 1
+ 
+ #endif
+-- 
+2.24.1
+

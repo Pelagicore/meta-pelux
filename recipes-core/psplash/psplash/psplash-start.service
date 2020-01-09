@@ -5,7 +5,7 @@ After=systemd-vconsole-setup.service systemd-udev-trigger.service systemd-udevd.
 DefaultDependencies=no
 
 [Service]
-ExecStart=/usr/bin/psplash --angle 270
+ExecStart=/usr/bin/psplash
 
 [Install]
 WantedBy=sysinit.target
