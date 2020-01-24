@@ -21,6 +21,12 @@ IMAGE_INSTALL += " \
 	${@bb.utils.contains("BBFILE_COLLECTIONS", "b2qt", "${QTAUTO_COMPONENTS}", "", d)} \
 "
 
+# MQTT is part of core image so add Qt interface too
+IMAGE_INSTALL_append = " \
+    qtmqtt \
+    qtserialport \
+"
+
 IMAGE_INSTALL_append_jetson-tx2 = " \
     egl-wayland \
 "
